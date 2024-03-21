@@ -2,7 +2,7 @@ import React from "react";
 
 import { Text } from "@atoms";
 
-export function DoubleTextContainer({
+export function TripleTextContainer({
   contentGap,
   textContainerPadding,
   textContainerWidth,
@@ -18,6 +18,12 @@ export function DoubleTextContainer({
   textContainerTwoColor,
   textContainerTwoFontWeight,
   textContainerTwoFontFamily,
+
+  textContainerThree,
+  textContainerThreeSize,
+  textContainerThreeColor,
+  textContainerThreeFontWeight,
+  textContainerThreeFontFamily,
 }: {
   contentGap?: string;
   textContainerWidth?: string;
@@ -34,6 +40,12 @@ export function DoubleTextContainer({
   textContainerTwoColor: string;
   textContainerTwoFontWeight?: string;
   textContainerTwoFontFamily?: string;
+
+  textContainerThree: string;
+  textContainerThreeSize: string;
+  textContainerThreeColor: string;
+  textContainerThreeFontWeight?: string;
+  textContainerThreeFontFamily?: string;
 }) {
   return (
     <>
@@ -46,6 +58,7 @@ export function DoubleTextContainer({
           textColor={textContainerOneColor}
           fontWeight={textContainerOneFontWeight}
           fontFamily={textContainerOneFontFamily}
+          padding="py-1"
         />
         <Text
           text={textContainerTwo}
@@ -53,6 +66,15 @@ export function DoubleTextContainer({
           textColor={textContainerTwoColor}
           fontWeight={textContainerTwoFontWeight}
           fontFamily={textContainerTwoFontFamily}
+          padding="py-1"
+        />
+        <Text
+          text={textContainerThree}
+          textSize={textContainerThreeSize}
+          textColor={textContainerThreeColor}
+          fontWeight={textContainerThreeFontWeight}
+          fontFamily={textContainerThreeFontFamily}
+          padding="py-1"
         />
       </div>
     </>

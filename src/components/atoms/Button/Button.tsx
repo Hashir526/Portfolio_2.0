@@ -3,12 +3,13 @@ import { CustomImage, Text } from "@atoms";
 
 export function Button({
   buttonStyling,
+  hoverStyle,
   buttonBackgroundColor,
   buttonWith,
   buttonHeight,
   buttonBorderColor,
   buttonRadius,
-  buttonOutsideText,
+  padding,
   imageSrc,
   imageWidth,
   imageHeight,
@@ -22,12 +23,13 @@ export function Button({
   buttonInsideFontWeight,
 }: {
   buttonStyling?: string;
+  hoverStyle?: string;
   buttonBackgroundColor?: string;
   buttonBorderColor?: string;
   buttonHeight?: string;
   buttonWith?: string;
   buttonRadius?: string;
-  buttonOutsideText?: string;
+  padding?: string;
   imageSrc?: any;
   imageWidth?: any;
   imageHeight?: any;
@@ -53,6 +55,7 @@ export function Button({
          ${buttonWith} ${buttonHeight} ${buttonBorderColor} 
          ${buttonRadius ? `${buttonRadius}` : "rounded-md "}
           ${buttonBackgroundColor}
+          ${hoverStyle} ${padding}
         `}
       >
         {isLoading ? (
@@ -60,10 +63,10 @@ export function Button({
         ) : (
           <>
             <Text
-              text={buttonOutsideText}
-              textColor={"text-[#FFF]"}
-              textSize={"text-base"}
-              fontWeight="font-normal"
+              text={buttonInsideText}
+              textColor={buttonInsideTextColor}
+              textSize={buttonInsideTextSize}
+              fontWeight={buttonInsideFontWeight}
             />
             {imageSrc !== null ? (
               <CustomImage
@@ -71,14 +74,6 @@ export function Button({
                 width={imageHeight}
                 height={imageWidth}
                 alt={imageAlert}
-              />
-            ) : null}
-            {buttonInsideText !== "" ? (
-              <Text
-                text={buttonInsideText}
-                textColor={buttonInsideTextColor}
-                textSize={buttonInsideTextSize}
-                fontWeight={buttonInsideFontWeight}
               />
             ) : null}
           </>

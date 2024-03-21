@@ -16,26 +16,28 @@ export const Navbar = () => {
   };
 
   return (
-    <div className="p-10 ">
-      <div className=" float-start">
-        <Button
-          buttonBackgroundColor="bg-none"
-          buttonInsideText="Hashir.K"
-          buttonInsideTextColor="text-black"
-          buttonInsideTextSize="text-4xl"
-          buttonWith="w-14"
-          buttonStyling={"p-2"}
-        />
+    <nav className="navbar fixed top-0 left-0 w-full z-10 bg-none ">
+      <div className="p-10 ">
+        <div className=" float-start">
+          <Button
+            buttonBackgroundColor="bg-none"
+            buttonInsideText="Hashir.K"
+            buttonInsideTextColor="text-black"
+            buttonInsideTextSize="text-4xl"
+            buttonWith="w-14"
+            buttonStyling={"p-2"}
+          />
+        </div>
+        <div className=" flex float-end">
+          <Button
+            imageSrc={darkModeSelect === true ? Moon : Sun}
+            imageAlert={darkModeSelect ? "Moon" : "Sun"}
+            imageHeight={34}
+            handleOnClick={() => toggle()}
+          />
+          <Button imageSrc={Bar} imageAlert={"Bar"} imageHeight={34} />
+        </div>
       </div>
-      <div className=" flex float-end">
-        <Button
-          imageSrc={darkModeSelect === true ? Moon : Sun}
-          imageAlert={darkModeSelect ? "Moon" : "Sun"}
-          imageHeight={34}
-          handleOnClick={() => toggle()}
-        />
-        <Button imageSrc={Bar} imageAlert={"Bar"} imageHeight={34} />
-      </div>
-    </div>
+    </nav>
   );
 };

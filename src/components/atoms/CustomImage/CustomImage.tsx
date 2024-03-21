@@ -5,11 +5,21 @@ export function CustomImage({
   width,
   height,
   alt,
+  padding,
 }: {
   src: string;
   width?: number;
   height?: number;
   alt: string;
+  padding?: string;
 }) {
-  return <Image src={src} width={width} height={height} alt={alt} />;
+  return (
+    <Image
+      src={src}
+      width={width}
+      height={height}
+      alt={alt}
+      className={`${padding}`}
+    />
+  );
 }
