@@ -4,6 +4,7 @@ import { CustomImage, Text } from "@atoms";
 export function Button({
   buttonStyling,
   hoverStyle,
+  activeStyle,
   buttonBackgroundColor,
   buttonWith,
   buttonHeight,
@@ -24,6 +25,7 @@ export function Button({
 }: {
   buttonStyling?: string;
   hoverStyle?: string;
+  activeStyle?: string;
   buttonBackgroundColor?: string;
   buttonBorderColor?: string;
   buttonHeight?: string;
@@ -55,7 +57,7 @@ export function Button({
          ${buttonWith} ${buttonHeight} ${buttonBorderColor} 
          ${buttonRadius ? `${buttonRadius}` : "rounded-md "}
           ${buttonBackgroundColor}
-          ${hoverStyle} ${padding}
+          ${hoverStyle} ${padding} ${activeStyle}
         `}
       >
         {isLoading ? (

@@ -23,15 +23,15 @@ export function DoubleTextContainer({
   textContainerWidth?: string;
   textContainerHeight?: string;
   textContainerPadding?: string;
-  textContainerOne: string;
-  textContainerOneSize: string;
-  textContainerOneColor: string;
+  textContainerOne?: string;
+  textContainerOneSize?: string;
+  textContainerOneColor?: string;
   textContainerOneFontWeight?: string;
   textContainerOneFontFamily?: string;
 
-  textContainerTwo: string;
-  textContainerTwoSize: string;
-  textContainerTwoColor: string;
+  textContainerTwo?: string;
+  textContainerTwoSize?: string;
+  textContainerTwoColor?: string;
   textContainerTwoFontWeight?: string;
   textContainerTwoFontFamily?: string;
 }) {

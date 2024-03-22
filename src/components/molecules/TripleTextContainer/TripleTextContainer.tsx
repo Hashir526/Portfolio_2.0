@@ -12,18 +12,21 @@ export function TripleTextContainer({
   textContainerOneColor,
   textContainerOneFontWeight,
   textContainerOneFontFamily,
+  textContainerOnePadding,
 
   textContainerTwo,
   textContainerTwoSize,
   textContainerTwoColor,
   textContainerTwoFontWeight,
   textContainerTwoFontFamily,
+  textContainerTwoPadding,
 
   textContainerThree,
   textContainerThreeSize,
   textContainerThreeColor,
   textContainerThreeFontWeight,
   textContainerThreeFontFamily,
+  textContainerThreePadding,
 }: {
   contentGap?: string;
   textContainerWidth?: string;
@@ -34,18 +37,21 @@ export function TripleTextContainer({
   textContainerOneColor: string;
   textContainerOneFontWeight?: string;
   textContainerOneFontFamily?: string;
+  textContainerOnePadding?: string;
 
   textContainerTwo: string;
   textContainerTwoSize: string;
   textContainerTwoColor: string;
   textContainerTwoFontWeight?: string;
   textContainerTwoFontFamily?: string;
+  textContainerTwoPadding?: string;
 
   textContainerThree: string;
   textContainerThreeSize: string;
   textContainerThreeColor: string;
   textContainerThreeFontWeight?: string;
   textContainerThreeFontFamily?: string;
+  textContainerThreePadding?: string;
 }) {
   return (
     <>
@@ -58,7 +64,9 @@ export function TripleTextContainer({
           textColor={textContainerOneColor}
           fontWeight={textContainerOneFontWeight}
           fontFamily={textContainerOneFontFamily}
-          padding="py-1"
+          padding={`${
+            textContainerOnePadding ? textContainerOnePadding : `py-1`
+          }`}
         />
         <Text
           text={textContainerTwo}
@@ -66,7 +74,9 @@ export function TripleTextContainer({
           textColor={textContainerTwoColor}
           fontWeight={textContainerTwoFontWeight}
           fontFamily={textContainerTwoFontFamily}
-          padding="py-1"
+          padding={`${
+            textContainerTwoPadding ? textContainerTwoPadding : `py-1`
+          }`}
         />
         <Text
           text={textContainerThree}
@@ -74,7 +84,9 @@ export function TripleTextContainer({
           textColor={textContainerThreeColor}
           fontWeight={textContainerThreeFontWeight}
           fontFamily={textContainerThreeFontFamily}
-          padding="py-1"
+          padding={`${
+            textContainerThreePadding ? textContainerThreePadding : `py-1`
+          }`}
         />
       </div>
     </>

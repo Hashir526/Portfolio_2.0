@@ -8,17 +8,21 @@ export const SideInfo = ({
   icon,
   data,
   text,
+  divStyling,
+  dataSize,
 }: {
   icon: any;
-  data: string;
-  text: string;
+  data?: string;
+  text?: string;
+  divStyling?: string;
+  dataSize?: string;
 }) => {
   return (
-    <div>
+    <div className={`${divStyling}`}>
       <CustomImage src={icon} alt={icon} height={44} padding="py-4" />
       <DoubleTextContainer
         textContainerOne={data}
-        textContainerOneSize={"text-4xl"}
+        textContainerOneSize={`${dataSize ? dataSize : "text-4xl"}`}
         textContainerOneColor={"text-[#1c2528]"}
         textContainerOneFontWeight="font-bold"
         textContainerTwo={text}
