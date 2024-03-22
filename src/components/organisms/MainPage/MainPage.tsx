@@ -498,7 +498,7 @@ export const MainPage = () => {
         <div className="content-center ">
           <CustomImage src={Review} alt={"Review"} height={150} width={150} />
 
-          <div style={{ width: "50%", margin: "auto" }}>
+          {/* <div style={{ width: "50%", margin: "auto" }}>
             <Carousel autoplay>
               <div>
                 <h3>Slide 1</h3>
@@ -513,7 +513,7 @@ export const MainPage = () => {
                 <h3>Slide 4</h3>
               </div>
             </Carousel>
-          </div>
+          </div> */}
         </div>
       </div>
 
