@@ -96,7 +96,7 @@ export const MainPage = () => {
       startTime: "Sept, 2023",
       endTime: "Current",
       institute: "Rapidev",
-      position: "Jr. Frontend Developer",
+      position: "Frontend Developer",
       detail: "ddddd",
     },
     {
