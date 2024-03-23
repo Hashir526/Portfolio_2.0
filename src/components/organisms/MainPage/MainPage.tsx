@@ -195,7 +195,7 @@ export const MainPage = () => {
       {/* Name and Pic ~ White BG */}
       <div className="bg-white py-14 mt-10">
         <div className="w-full flex justify-center ">
-          <div className="max-w-[570px] place-items-center">
+          <div className="md:max-w-[570px] place-items-center">
             <DoubleTextContainer
               textContainerOne={"FrontEnd Developer"}
               textContainerOneSize={"lg:text-4xl text-2xl"}
