@@ -127,7 +127,7 @@ export const MainPage = () => {
       startTime: "Sept, 2023",
       endTime: "Current",
       institute: "Rapidev",
-      position: "Jr. Frontend Developer",
+      position: "Frontend Developer",
       detail: "ddddd",
     },
     {
@@ -248,10 +248,16 @@ export const MainPage = () => {
   return (
     <div className={mode}>
       {/* Name and Pic ~ White BG */}
+<<<<<<< HEAD
       <div className="py-14 mt-10 bg-[#FFF] dark:bg-[#181e27]">
         <div className="w-full flex flex-col items-center md:flex-row md:justify-center">
           <CustomImage src={Sun} alt={"pic"} height={100} width={100} />
           <div className="md:max-w-[570px] md:ml-8 mt-5 md:mt-0 ">
+=======
+      <div className="bg-white py-14 mt-10">
+        <div className="w-full flex justify-center ">
+          <div className="md:max-w-[570px] place-items-center">
+>>>>>>> 0afa859b27a18abecc8600e3f3058957f2239824
             <DoubleTextContainer
               textContainerOne={"FrontEnd Developer"}
               textContainerOneSize={"lg:text-4xl md:text-2xl text-xl"}
