@@ -17,7 +17,7 @@ export const SkillInfoContainer = ({
     <>
       <Text
         text={language}
-        textSize={"text-3xl"}
+        textSize={"md:text-3xl text-xl"}
         fontWeight="font-bold"
         textColor={"text-[#1c2528] "}
       />
@@ -27,6 +27,7 @@ export const SkillInfoContainer = ({
         count={10}
         character={<XFilled />}
         style={{ color: "#ff8059" }}
+        className="hidden sm:block"
       />
       <Text
         text={`${(grip / 10) * 100} %`}
@@ -34,7 +35,7 @@ export const SkillInfoContainer = ({
         padding="p-2"
         border="rounded-full"
         textColor={"text-[#FFF]"}
-        textSize={"text-xl"}
+        textSize={"md:text-xl text-base"}
         fontWeight="font-bold"
       />
     </>

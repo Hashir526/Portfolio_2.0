@@ -14,25 +14,25 @@ export const ProjectListContainer = ({
   languageUsed: string;
 }) => {
   return (
-    <>
+    <div className="hover:cursor-pointer hover:opacity-70 flex justify-center items-center lg:m-20 m-10">
       <div className="">
         <CustomImage src={image} alt={"image"} height={100} width={500} />
       </div>
       <div className="flex flex-col items-center">
         <TripleTextContainer
           textContainerOne={projectName}
-          textContainerOneSize={"text-8xl"}
+          textContainerOneSize={"lg:text-8xl md:text-4xl text-2xl"}
           textContainerOneColor={"text-[#1c2528]"}
           textContainerOneFontWeight="font-semibold"
           textContainerOnePadding="pb-8"
           textContainerTwo={projectType}
-          textContainerTwoSize={"text-3xl"}
+          textContainerTwoSize={"lg:text-3xl md:text-xl text-base"}
           textContainerTwoColor={"#3c4649"}
           textContainerThree={languageUsed}
-          textContainerThreeSize={"text-3xl"}
+          textContainerThreeSize={"lg:text-3xl md:text-xl text-base"}
           textContainerThreeColor={"#3c4649"}
         />
       </div>
-    </>
+    </div>
   );
 };

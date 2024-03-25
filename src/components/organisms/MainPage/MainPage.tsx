@@ -1,8 +1,14 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 
-// import "antd/dist/antd.css";
-
-import { Carousel, Input } from "antd";
+import TextField from "@mui/material/TextField";
+import { useTheme } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import MobileStepper from "@mui/material/MobileStepper";
+import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
+import SwipeableViews from "react-swipeable-views";
+import { autoPlay } from "react-swipeable-views-utils";
 
 import { Button, CustomImage, Text } from "@atoms";
 
@@ -23,8 +29,33 @@ import Review from "./../../../assets/svg/Review.svg";
 import Phone from "./../../../assets/svg/Phone.svg";
 import Mail from "./../../../assets/svg/Mail.svg";
 import Location from "./../../../assets/svg/Location.svg";
+import KeyboardArrowLeft from "./../../../assets/svg/LeftArrow.svg";
+import KeyboardArrowRight from "./../../../assets/svg/RightArrow.svg";
 
 export const MainPage = () => {
+  const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
+
+  const theme = useTheme();
+  const [activeStep, setActiveStep] = React.useState(0);
+  const [mode, setMode] = useState<any>();
+
+  useEffect(() => {
+    setMode(localStorage.getItem("Mode"));
+    console.log("mode", mode);
+  }, [mode]);
+
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
+
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+
+  const handleStepChange = (step: number) => {
+    setActiveStep(step);
+  };
+
   const BornExpDate = [
     {
       TextOne: "Born in",
@@ -150,9 +181,9 @@ export const MainPage = () => {
     },
     {
       image: Work,
-      projectName: "OCS",
-      projectType: "Frontend",
-      languageUsed: "ReactJs",
+      projectName: "Portfolio",
+      projectType: "Full-Stack",
+      languageUsed: "NextJs",
     },
   ];
 
@@ -190,27 +221,53 @@ export const MainPage = () => {
     },
   ];
 
+  const images = [
+    {
+      label: "San Francisco – Oakland Bay Bridge, United States",
+      imgPath:
+        "https://images.unsplash.com/photo-1537944434965-cf4679d1a598?auto=format&fit=crop&w=400&h=250&q=60",
+    },
+    {
+      label: "Bird",
+      imgPath:
+        "https://images.unsplash.com/photo-1538032746644-0212e812a9e7?auto=format&fit=crop&w=400&h=250&q=60",
+    },
+    {
+      label: "Bali, Indonesia",
+      imgPath:
+        "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=400&h=250",
+    },
+    {
+      label: "Goč, Serbia",
+      imgPath:
+        "https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60",
+    },
+  ];
+
+  const maxSteps = images.length;
   return (
-    <>
+    <div className={mode}>
       {/* Name and Pic ~ White BG */}
-      <div className="bg-white py-14 mt-10">
-        <div className="w-full flex justify-center ">
-          <div className="max-w-[570px] place-items-center">
+      <div className="py-14 mt-10 bg-[#FFF] dark:bg-[#181e27]">
+        <div className="w-full flex flex-col items-center md:flex-row md:justify-center">
+          <CustomImage src={Sun} alt={"pic"} height={100} width={100} />
+          <div className="md:max-w-[570px] md:ml-8 mt-5 md:mt-0 ">
             <DoubleTextContainer
               textContainerOne={"FrontEnd Developer"}
-              textContainerOneSize={"lg:text-4xl text-2xl"}
+              textContainerOneSize={"lg:text-4xl md:text-2xl text-xl"}
               textContainerOneColor={"font-sans"}
               textContainerOneFontWeight={"text-[#3c4649]"}
               textContainerTwo={"Hashir Khurram"}
-              textContainerTwoSize={"lg:text-9xl text-7xl"}
+              textContainerTwoSize={"lg:text-9xl md:text-7xl text-4xl"}
               textContainerTwoColor={"text-[#1c2528]"}
               textContainerTwoFontWeight={"font-sans"}
+              textContainerPadding="ml-7"
             />
-            <div className="border-l-2 border-gray-500 p-7">
+            <div className="md:border-l-2 md:border-gray-500 p-7 mt-5 md:mt-0">
               <Text
-                text={"I am FrontEnd Developer based in Islamabad, Pakistan."}
+                text={"I am a FrontEnd Developer based in Islamabad, Pakistan."}
               />
-              <div className="flex gap-2">
+              <div className="flex gap-2 mt-4 md:mt-6">
                 <Button
                   imageSrc={Linkedin}
                   imageAlert={"Linkedin"}
@@ -224,37 +281,37 @@ export const MainPage = () => {
               </div>
             </div>
           </div>
-          <CustomImage src={Sun} alt={"pic"} height={100} width={100} />
         </div>
-        <div className="flex justify-evenly ">
-          {BornExpDate.map((item, key) => {
-            return (
-              <DoubleTextContainer
-                key={key}
-                textContainerOne={item.TextOne}
-                textContainerOneSize={"text-xl"}
-                textContainerOneColor={"text-[#3c4649]"}
-                textContainerTwo={item.TextTwo}
-                textContainerTwoSize={"text-xl"}
-                textContainerTwoColor={"text-[#1c2528]"}
-                textContainerTwoFontWeight="font-bold"
-              />
-            );
-          })}
+        <div className="flex flex-col md:flex-row justify-center items-center mt-5 ">
+          {BornExpDate.map((item, key) => (
+            <DoubleTextContainer
+              key={key}
+              textContainerOne={item.TextOne}
+              textContainerOneSize={"text-xl"}
+              textContainerOneColor={"text-[#3c4649]"}
+              textContainerTwo={item.TextTwo}
+              textContainerTwoSize={"text-xl"}
+              textContainerTwoColor={"text-[#1c2528]"}
+              textContainerTwoFontWeight="font-bold"
+              textContainerPadding="mt-3 md:mt-0 md:ml-6"
+            />
+          ))}
         </div>
       </div>
 
-      {/* About Me ~ #ebe7e0 BG */}
-      <div className="bg-[#ebe7e0] py-14 w-full flex justify-center items-center">
+      {/* About Me ~ #ebe7e0 BG  */}
+      <div className="bg-[#ebe7e0] dark:bg-[#6c757d] py-14 w-full flex justify-center items-center">
         <div className="content-center ">
-          <Text
-            text={"About Me"}
-            textSize={"text-9xl"}
-            textColor={"text-[#1c2528]"}
-            fontFamily="font-[Sorts Mill Goudy]"
-          />
-          <div className="flex py-10">
-            <div className="max-w-[140px] ">
+          <div className="text-center">
+            <Text
+              text={"About Me"}
+              textSize={"lg:text-9xl md:text-7xl text-4xl "}
+              textColor={"text-[#1c2528]"}
+              fontFamily="font-[Sorts Mill Goudy]"
+            />
+          </div>
+          <div className="flex lg:flex-row flex-col py-10">
+            <div className="lg:flex-col flex-row flex lg:max-w-[140px] gap-10 mb-5 ml-10">
               {AboutSideData.map((item, key) => {
                 return (
                   <div key={key}>
@@ -262,23 +319,26 @@ export const MainPage = () => {
                       icon={item.icon}
                       data={item.data}
                       text={item.text}
+                      dataSize="md:text-4xl text-2xl"
+                      textSize="md:text-xl text-base"
                     />
                   </div>
                 );
               })}
             </div>
-            <div className="max-w-[750px] border-l-2 border-gray-500 p-10 ">
+            <div className="max-w-[750px] lg:border-l-2 lg:border-gray-500 p-10 ">
               <Text
                 text={
                   "I'm a recent Software Engineering graduate with a passion for frontend development. Skilled in HTML, CSS, Bootstrap, JavaScript, and SEO, I transform design concepts into user-friendly websites. I'm dedicated to continuous learning and eager to collaborate on exciting web projects. "
                 }
+                padding="mb-10"
               />
               <Button
                 buttonBackgroundColor="bg-none hover:bg-[#ff8059] text-[#1c2528] hover:text-[#FFF] "
                 buttonBorderColor="border-2 border-[#ff8059]"
                 hoverStyle="transition-all duration-500 ease-in-out"
                 padding="my-4"
-                buttonWith="w-56"
+                buttonWith="md:w-56 w-34"
                 buttonInsideText="Contact Me"
                 buttonInsideFontWeight="font-bold"
                 buttonInsideTextColor=" "
@@ -289,17 +349,20 @@ export const MainPage = () => {
         </div>
       </div>
 
-      {/* My Resume ~ White BG*/}
-      <div className="bg-[#FFF] py-14 w-full flex justify-center items-center">
+      {/* My Resume ~ White BG */}
+      <div className="bg-[#FFF] dark:bg-[#181e27] py-14 w-full flex justify-center items-center">
         <div className="content-center ">
-          <Text
-            text={"My Resume"}
-            textSize={"text-9xl"}
-            textColor={"text-[#1c2528]"}
-            fontFamily="font-[Sorts Mill Goudy]"
-          />
-          <div className="max-w-[1000px] border-l-2 border-gray-500 p-8 my-10 ">
-            <div className="p-7 mb-10">
+          <div className="text-center">
+            <Text
+              text={"My Resume"}
+              textSize={"lg:text-9xl md:text-7xl text-4xl "}
+              textColor={"text-[#1c2528]"}
+              fontFamily="font-[Sorts Mill Goudy]"
+            />
+          </div>
+
+          <div className="max-w-[1000px] md:border-l-2 md:border-gray-500 p-8 md:mt-10  ">
+            <div className="p-7 lg:mb-10">
               <Text
                 text={
                   "Talented UX designer with 7+ years of experience, seeking to elevate UI/UX at ABC, Inc. As Lead UI/UX Head completed project before dead line. ittis augue, id sollicitudin justo tristique ut. Nullam ex enim, euismod vel bibendum ultrices, fringilla vel eros. Donec euism od leo um, at pellentesque velituis a congue sem."
@@ -309,7 +372,7 @@ export const MainPage = () => {
             <div className="p-7">
               <Text
                 text={"SKILLS"}
-                textSize={"text-4xl"}
+                textSize={"lg:text-4xl text-2xl "}
                 fontWeight="font-bold"
                 textColor={"text-[#1c2528]"}
                 padding="pb-10"
@@ -329,29 +392,29 @@ export const MainPage = () => {
               })}
             </div>
             <div className="flex p-7">
-              <div className="flex gap-48 flex-wrap">
+              <div className="flex md:gap-48  flex-wrap ">
                 <div>
                   <div className="">
                     <Text
                       text={"Education"}
-                      textSize={"text-4xl"}
+                      textSize={"lg:text-4xl text-2xl"}
                       fontWeight="font-bold"
                       textColor={"text-[#1c2528]"}
                       padding="pb-10"
                     />
                     {EducationData.map((item, key) => {
                       return (
-                        <div className="mb-12" key={key}>
+                        <div className="mb-12 " key={key}>
                           <TripleTextContainer
                             textContainerOne={`${item.startTime}-${item.endTime}`}
-                            textContainerOneSize={"text-xl"}
+                            textContainerOneSize={"lg:text-xl text-base"}
                             textContainerOneColor={"text-[#3c4649]"}
                             textContainerTwo={item.degree}
                             textContainerTwoSize={"text-2xl"}
                             textContainerTwoColor={"text-[#1c2528]"}
                             textContainerTwoFontWeight="font-bold"
                             textContainerThree={item.institute}
-                            textContainerThreeSize={"text-xl"}
+                            textContainerThreeSize={"lg:text-xl text-base"}
                             textContainerThreeColor={"text-[#3c4649]"}
                           />
                         </div>
@@ -361,7 +424,7 @@ export const MainPage = () => {
                   <div className="">
                     <Text
                       text={"Course"}
-                      textSize={"text-4xl"}
+                      textSize={"lg:text-4xl text-2xl"}
                       fontWeight="font-bold"
                       textColor={"text-[#1c2528]"}
                       padding="pb-10"
@@ -371,14 +434,14 @@ export const MainPage = () => {
                         <div className="mb-12" key={key}>
                           <TripleTextContainer
                             textContainerOne={`${item.startTime}-${item.endTime}`}
-                            textContainerOneSize={"text-xl"}
+                            textContainerOneSize={"lg:text-xl text-base"}
                             textContainerOneColor={"text-[#3c4649]"}
                             textContainerTwo={item.degree}
-                            textContainerTwoSize={"text-2xl"}
+                            textContainerTwoSize={"lg:text-2xl text-lg"}
                             textContainerTwoColor={"text-[#1c2528]"}
                             textContainerTwoFontWeight="font-bold"
                             textContainerThree={item.institute}
-                            textContainerThreeSize={"text-xl"}
+                            textContainerThreeSize={"lg:text-xl text-base"}
                             textContainerThreeColor={"text-[#3c4649]"}
                           />
                         </div>
@@ -390,7 +453,7 @@ export const MainPage = () => {
                   <div>
                     <Text
                       text={"Experience"}
-                      textSize={"text-4xl"}
+                      textSize={"lg:text-4xl text-2xl"}
                       fontWeight="font-bold"
                       textColor={"text-[#1c2528]"}
                       padding="pb-10"
@@ -400,19 +463,19 @@ export const MainPage = () => {
                         <div key={key}>
                           <TripleTextContainer
                             textContainerOne={`${item.startTime}-${item.endTime}`}
-                            textContainerOneSize={"text-xl"}
+                            textContainerOneSize={"lg:text-xl text-base"}
                             textContainerOneColor={"text-[#3c4649]"}
                             textContainerTwo={item.institute}
                             textContainerTwoSize={"text-2xl"}
                             textContainerTwoColor={"text-[#1c2528]"}
                             textContainerTwoFontWeight="font-bold"
                             textContainerThree={item.position}
-                            textContainerThreeSize={"text-xl"}
+                            textContainerThreeSize={"lg:text-xl text-base"}
                             textContainerThreeColor={"text-[#3c4649]"}
                           />
                           <Text
                             text={item.detail}
-                            textSize={"text-xl"}
+                            textSize={"lg:text-xl text-base"}
                             textColor={"text-[#1c2528]"}
                             padding="mt-4 mb-12"
                           />
@@ -428,7 +491,7 @@ export const MainPage = () => {
               buttonBorderColor="border-2 border-[#ff8059]"
               hoverStyle="transition-all duration-500 ease-in-out"
               padding="ml-7"
-              buttonWith="w-56"
+              buttonWith="md:w-56 w-34"
               buttonInsideText="Download CV"
               buttonInsideFontWeight="font-bold"
               buttonInsideTextColor=" "
@@ -438,17 +501,20 @@ export const MainPage = () => {
         </div>
       </div>
 
-      {/* My Project ~ #ebe7e0 BG */}
+      {/* My Project ~ #ebe7e0 BG  */}
 
-      <div className="bg-[#ebe7e0] py-14 w-full flex justify-center items-center">
+      <div className="bg-[#ebe7e0] dark:bg-[#6c757d] py-14 w-full flex justify-center items-center">
         <div className="content-center ">
-          <Text
-            text={"My Projects"}
-            textSize={"text-9xl"}
-            textColor={"text-[#1c2528]"}
-            fontFamily="font-[Sorts Mill Goudy]"
-          />
-          <div className="max-w-[1000px] border-l-2 border-gray-500 p-8 my-10 ">
+          <div className="text-center">
+            <Text
+              text={"My Projects"}
+              textSize={"lg:text-9xl md:text-7xl text-4xl "}
+              textColor={"text-[#1c2528]"}
+              fontFamily="font-[Sorts Mill Goudy]"
+            />
+          </div>
+
+          <div className="lg:max-w-[1000px] lg:border-l-2 lg:border-gray-500 p-8 my-10 ">
             <div className="p-7 ">
               <Text
                 text={
@@ -458,7 +524,7 @@ export const MainPage = () => {
             </div>
           </div>
 
-          <div className="max-w-[800px] m-10 flex place-content-around ">
+          <div className="lg:max-w-[800px] m-10 flex place-content-around Fivess:flex-row flex-col ">
             {ProjectSelect.map((item, key) => {
               return (
                 <div className="" key={key}>
@@ -466,9 +532,9 @@ export const MainPage = () => {
                     buttonBackgroundColor="bg-none"
                     buttonInsideText={item.selectType}
                     buttonInsideTextColor="text-black"
-                    buttonInsideTextSize="text-4xl"
+                    buttonInsideTextSize="lg:text-4xl md:text-2xl Fivess:text-lg text-2xl"
                     buttonInsideFontWeight="font-bold"
-                    buttonRadius="rounded-none"
+                    buttonRadius="rounded-none border-[#ebe7e0] border-b-4"
                     hoverStyle="hover:border-b-4 hover:border-[#ff8059]"
                   />
                 </div>
@@ -476,10 +542,10 @@ export const MainPage = () => {
             })}
           </div>
 
-          <div className="max-w-[1000px] my-10  ">
+          <div className="lg:max-w-[1000px] my-10  ">
             {ProjectDetail.map((item, key) => {
               return (
-                <div key={key} className="flex gap-20 items-center">
+                <div key={key} className="flex lg:gap-20 gap-10 items-center">
                   <ProjectListContainer
                     image={item.image}
                     projectName={item.projectName}
@@ -493,55 +559,127 @@ export const MainPage = () => {
         </div>
       </div>
 
-      {/* Review ~ white BG */}
-      <div className="bg-[#FFF] py-14 w-full flex justify-center items-center">
-        <div className="content-center ">
-          <CustomImage src={Review} alt={"Review"} height={150} width={150} />
+      {/* Review ~ white BG  */}
+      <div className="bg-[#FFF] dark:bg-[#181e27] py-14 w-full flex justify-center items-center">
+        <div className="content-center flex flex-col items-center">
+          <CustomImage
+            src={Review}
+            alt={"Review"}
+            height={150}
+            width={150}
+            padding="ml-12"
+          />
+          <Box sx={{ maxWidth: 400, flexGrow: 1 }}>
+            <Paper
+              square
+              elevation={0}
+              sx={{
+                display: "flex",
+                height: 50,
+                pl: 2,
+                marginBottom: 5,
+                marginTop: 5,
+                justifyContent: "center",
+                alignItems: "center",
+                bgcolor: "background.default",
+                textAlign: "center",
+              }}
+            >
+              <Typography
+                style={{
+                  margin: "auto",
+                }}
+              >
+                {`"${images[activeStep].label}"`}
+              </Typography>
+            </Paper>
 
-          {/* <div style={{ width: "50%", margin: "auto" }}>
-            <Carousel autoplay>
-              <div>
-                <h3>Slide 1</h3>
-              </div>
-              <div>
-                <h3>Slide 2</h3>
-              </div>
-              <div>
-                <h3>Slide 3</h3>
-              </div>
-              <div>
-                <h3>Slide 4</h3>
-              </div>
-            </Carousel>
-          </div> */}
+            <AutoPlaySwipeableViews
+              axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+              index={activeStep}
+              onChangeIndex={handleStepChange}
+              enableMouseEvents
+            >
+              {images.map((step, index) => (
+                <div key={step.label}>
+                  {Math.abs(activeStep - index) <= 2 ? (
+                    <Box
+                      component="img"
+                      sx={{
+                        height: 200,
+                        display: "block",
+                        maxWidth: 400,
+                        overflow: "hidden",
+                        width: "50%",
+                        borderRadius: "100%",
+                        margin: "auto",
+                      }}
+                      src={step.imgPath}
+                      alt={step.label}
+                    />
+                  ) : null}
+                </div>
+              ))}
+            </AutoPlaySwipeableViews>
+            <MobileStepper
+              steps={maxSteps}
+              position="static"
+              activeStep={activeStep}
+              nextButton={
+                <Button
+                  handleOnClick={handleNext}
+                  disabled={activeStep === maxSteps - 1}
+                  imageSrc={
+                    theme.direction === "rtl"
+                      ? KeyboardArrowLeft
+                      : KeyboardArrowRight
+                  }
+                />
+              }
+              backButton={
+                <Button
+                  handleOnClick={handleBack}
+                  disabled={activeStep === 0}
+                  imageSrc={
+                    theme.direction === "rtl"
+                      ? KeyboardArrowRight
+                      : KeyboardArrowLeft
+                  }
+                />
+              }
+            />
+          </Box>
         </div>
       </div>
 
-      {/* Contact ~ #ebe7e0 BG */}
-      <div className="bg-[#ebe7e0] py-14 w-full flex justify-center items-center">
+      {/* Contact ~ #ebe7e0 BG  */}
+      <div className="bg-[#ebe7e0] dark:bg-[#6c757d] py-14 w-full flex justify-center items-center">
         <div className="content-center ">
-          <Text
-            text={"Contact Me"}
-            textSize={"text-9xl"}
-            textColor={"text-[#1c2528]"}
-            fontFamily="font-[Sorts Mill Goudy]"
-          />
-          <div className="flex py-10">
-            <div className="max-w-[270px] ">
+          <div className="text-center">
+            <Text
+              text={"Contact Me"}
+              textSize={"lg:text-9xl md:text-7xl text-4xl "}
+              textColor={"text-[#1c2528]"}
+              fontFamily="font-[Sorts Mill Goudy]"
+            />
+          </div>
+
+          <div className="flex md:flex-row flex-col py-10">
+            <div className="flex md:flex-col Fivess:flex-row flex-col Fivess:gap-10 ml-10">
               {ContactSideData.map((item, key) => {
                 return (
-                  <div key={key}>
+                  <div key={key} className="w-full  md:w-auto md:mb-0 md:mr-5">
                     <SideInfo
                       icon={item.icon}
                       data={item.data}
                       divStyling="mb-5"
-                      dataSize="text-lg"
+                      dataSize="md:text-lg text-sm"
                     />
                   </div>
                 );
               })}
             </div>
-            <div className="max-w-[750px] border-l-2 border-gray-500 p-10 ">
+            <div className="w-full md:border-l-2 md:border-gray-500 p-10 ">
               {ContactInuputs.map((item, key) => {
                 return (
                   <div key={key}>
@@ -549,9 +687,14 @@ export const MainPage = () => {
                       text={item?.header}
                       textColor={"text-[#1c2528]"}
                       fontWeight="font-bold"
-                      textSize={"text-2xl"}
+                      textSize={"md:text-2xl text-lg"}
+                      padding="mb-2"
                     />
-                    {/* <Input placeholder="Basic usage" /> */}
+                    <TextField
+                      id="outlined-number"
+                      multiline
+                      className="w-[100%] mb-5"
+                    />
                   </div>
                 );
               })}
@@ -561,7 +704,7 @@ export const MainPage = () => {
                 buttonBorderColor="border-2 border-[#ff8059]"
                 hoverStyle="transition-all duration-500 ease-in-out"
                 padding="my-4"
-                buttonWith="w-56"
+                buttonWith="md:w-56 w-34"
                 buttonInsideText="Submit"
                 buttonInsideFontWeight="font-bold"
                 buttonInsideTextColor=" "
@@ -571,6 +714,6 @@ export const MainPage = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };

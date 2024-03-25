@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Button } from "@atoms";
 
@@ -12,11 +12,20 @@ export const Navbar = () => {
   const [darkModeSelect, setDarkModeSelect] = useState<Boolean>(false);
 
   const toggle = () => {
+    const newMode = !darkModeSelect ? "dark" : "light";
     setDarkModeSelect(!darkModeSelect);
+    localStorage.setItem("Mode", newMode);
   };
 
+  useEffect(() => {
+    const mode = localStorage.getItem("Mode");
+    if (mode) {
+      setDarkModeSelect(mode === "dark");
+    }
+  }, []);
+
   return (
-    <nav className="navbar fixed top-0 left-0 w-full z-10 bg-none ">
+    <nav className="navbar fixed top-0 left-0 w-full z-10  ">
       <div className="p-10 ">
         <div className=" float-start">
           <Button

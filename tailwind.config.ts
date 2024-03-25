@@ -9,6 +9,11 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        xxs: "0px",
+        Fivess: "500px",
+
+      },
       colors:{
         "lightWhite":"#FFF",
         "lightOffBrown":"#ebe7e0",
@@ -23,5 +28,6 @@ const config: Config = {
     },
   },
   plugins: [],
+  darkMode:"class"
 }
 export default config

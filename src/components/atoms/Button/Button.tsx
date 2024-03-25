@@ -2,6 +2,7 @@ import React from "react";
 import { CustomImage, Text } from "@atoms";
 
 export function Button({
+  disabled = false,
   buttonStyling,
   hoverStyle,
   activeStyle,
@@ -23,6 +24,8 @@ export function Button({
   buttonInsideTextSize,
   buttonInsideFontWeight,
 }: {
+  disabled?: boolean;
+
   buttonStyling?: string;
   hoverStyle?: string;
   activeStyle?: string;
@@ -48,6 +51,7 @@ export function Button({
     <>
       <button
         onClick={handleOnClick}
+        disabled={disabled}
         type={type}
         className={`${
           buttonStyling
@@ -56,7 +60,7 @@ export function Button({
         }
          ${buttonWith} ${buttonHeight} ${buttonBorderColor} 
          ${buttonRadius ? `${buttonRadius}` : "rounded-md "}
-          ${buttonBackgroundColor}
+         ${disabled ? "cursor-not-allowed " : buttonBackgroundColor}
           ${hoverStyle} ${padding} ${activeStyle}
         `}
       >
