@@ -43,6 +43,7 @@ export const MainPage = () => {
     setMode(localStorage.getItem("Mode"));
     console.log("mode", mode);
   }, [mode]);
+  console.log("mode",mode)
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
