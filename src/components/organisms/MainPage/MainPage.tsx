@@ -31,7 +31,7 @@ import Mail from "./../../../assets/svg/Mail.svg";
 import Location from "./../../../assets/svg/Location.svg";
 import KeyboardArrowLeft from "./../../../assets/svg/LeftArrow.svg";
 import KeyboardArrowRight from "./../../../assets/svg/RightArrow.svg";
-
+console.log("first")
 export const MainPage = () => {
   const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
