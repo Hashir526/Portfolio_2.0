@@ -4,7 +4,8 @@ import React, { useEffect, useState } from "react";
 
 import { Button } from "@atoms";
 
-import Bar from "./../../../assets/svg/Bar.svg";
+import { Dropdown } from "@organisms";
+
 import Sun from "./../../../assets/svg/Sun.svg";
 import Moon from "./../../../assets/svg/Moon.svg";
 
@@ -25,8 +26,8 @@ export const Navbar = () => {
   }, []);
 
   return (
-    <nav className="navbar fixed top-0 left-0 w-full z-10  ">
-      <div className="p-10 ">
+    <nav className="navbar fixed top-0 left-0 w-full z-10 xl:bg-transparent bg-[#e9ce9c] ">
+      <div className="m-10">
         <div className=" float-start">
           <Button
             buttonBackgroundColor="bg-none"
@@ -44,7 +45,8 @@ export const Navbar = () => {
             imageHeight={34}
             handleOnClick={() => toggle()}
           />
-          <Button imageSrc={Bar} imageAlert={"Bar"} imageHeight={34} />
+
+          <Dropdown />
         </div>
       </div>
     </nav>

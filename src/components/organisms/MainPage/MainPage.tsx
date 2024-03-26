@@ -248,7 +248,6 @@ export const MainPage = () => {
   return (
     <div className={mode}>
       {/* Name and Pic ~ White BG */}
-
       <div className="py-14 mt-10 bg-[#FFF] dark:bg-[#181e27]">
         <div className="w-full flex flex-col items-center md:flex-row md:justify-center">
           <CustomImage src={Sun} alt={"pic"} height={100} width={100} />
@@ -525,7 +524,7 @@ export const MainPage = () => {
             </div>
           </div>
 
-          <div className="lg:max-w-[800px] m-10 flex place-content-around Fivess:flex-row flex-col ">
+          <div className="lg:max-w-[800px] m-10 flex Fivess:place-content-around justify-center items-center align-middle Fivess:flex-row flex-col ">
             {ProjectSelect.map((item, key) => {
               return (
                 <div className="" key={key}>

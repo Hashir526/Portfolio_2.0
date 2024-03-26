@@ -7,7 +7,7 @@ export function CustomImage({
   alt,
   padding,
 }: {
-  src: string;
+  src: any;
   width?: number;
   height?: number;
   alt: string;

@@ -1,10 +1,11 @@
 import React from "react";
-import { MainPage } from "@organisms";
+import { MainPage, ProjectDetail } from "@organisms";
 
 export const HomePage = () => {
   return (
     <>
-      <MainPage />
+      {/* <MainPage /> */}
+      <ProjectDetail />
     </>
   );
 };
