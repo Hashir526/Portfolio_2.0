@@ -49,7 +49,7 @@ export const MainPage = () => {
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
   // const [mode, setMode] = useState<any>();
-
+console.log("s")
   const socialMedia = [
     {
       logo: Linkedin,
