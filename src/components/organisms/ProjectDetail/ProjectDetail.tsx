@@ -1,11 +1,11 @@
 import React from "react";
 
 import { Button, CustomImage, Text } from "@atoms";
-import { DoubleTextContainer, SideInfo, SkillInfoContainer } from "@molecules";
+import { DoubleTextContainer } from "@molecules";
 
 import Try from "./../../../assets/img/try.jpg";
 
-export const ProjectDetail = () => {
+export const ProjectDetail = ({ data }: { data: any }) => {
   const ProjectSimpleDate = [
     {
       TextOne: "Time Frame",
@@ -106,10 +106,30 @@ export const ProjectDetail = () => {
           />
         </div>
         <div className="flex flex-wrap justify-center max-w-[1000px] gap-20 mx-auto">
-          <CustomImage src={Try} alt={""} height={350} width={200} />
-          <CustomImage src={Try} alt={""} height={350} width={200} />
-          <CustomImage src={Try} alt={""} height={350} width={200} />
-          <CustomImage src={Try} alt={""} height={350} width={200} />
+          <CustomImage
+            src={Try}
+            alt={"Project Image"}
+            height={350}
+            width={200}
+          />
+          <CustomImage
+            src={Try}
+            alt={"Project Image"}
+            height={350}
+            width={200}
+          />
+          <CustomImage
+            src={Try}
+            alt={"Project Image"}
+            height={350}
+            width={200}
+          />
+          <CustomImage
+            src={Try}
+            alt={"Project Image"}
+            height={350}
+            width={200}
+          />
         </div>
       </div>
 

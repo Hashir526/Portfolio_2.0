@@ -28,9 +28,10 @@ export const Dropdown = () => {
     <div>
       <Button
         imageSrc={Bar}
-        imageAlert={"Bar"}
+        imageAlt={"Bar"}
         handleOnClick={handleOpen}
         imageHeight={34}
+        imageCheck={true}
       />
       <Modal
         open={open}
@@ -40,16 +41,17 @@ export const Dropdown = () => {
         className="modal-transition"
       >
         <div className="absolute top-0 right-0 flex flex-col w-full h-full bg-[#ebe7e0] p-10 transition-transform duration-500 transform">
-          <div className="top-0 right-0">
+          <div className="absolute top-0 right-0 m-11">
             <Button
               imageSrc={Cross}
               imageHeight={40}
               imageWidth={40}
               handleOnClick={handleClose}
+              imageCheck={true}
             />
           </div>
 
-          <div className="flex flex-col justify-center items-center gap-14">
+          <div className="flex flex-col justify-center items-center gap-14 mt-16">
             {Pages.map((item, key) => (
               <div key={key}>
                 <Button

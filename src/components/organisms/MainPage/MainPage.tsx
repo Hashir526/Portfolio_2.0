@@ -1,7 +1,6 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-import TextField from "@mui/material/TextField";
 import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MobileStepper from "@mui/material/MobileStepper";
@@ -9,6 +8,12 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
+
+import { enqueueSnackbar } from "notistack";
+
+import emailjs from "@emailjs/browser";
+
+import { useRouter } from "next/navigation";
 
 import { Button, CustomImage, Text } from "@atoms";
 
@@ -31,31 +36,30 @@ import Mail from "./../../../assets/svg/Mail.svg";
 import Location from "./../../../assets/svg/Location.svg";
 import KeyboardArrowLeft from "./../../../assets/svg/LeftArrow.svg";
 import KeyboardArrowRight from "./../../../assets/svg/RightArrow.svg";
-console.log("first")
+import { TextField } from "@mui/material";
+import { ProjectDetail } from "@organisms";
+
 export const MainPage = () => {
+  const router = useRouter();
+
+  const form = useRef<HTMLFormElement | null>(null);
+
   const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
-  const [mode, setMode] = useState<any>();
+  // const [mode, setMode] = useState<any>();
 
-  useEffect(() => {
-    setMode(localStorage.getItem("Mode"));
-    console.log("mode", mode);
-  }, [mode]);
-  console.log("mode",mode)
-
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const handleStepChange = (step: number) => {
-    setActiveStep(step);
-  };
+  const socialMedia = [
+    {
+      logo: Linkedin,
+      url: "https://pk.linkedin.com/",
+    },
+    {
+      logo: Github,
+      url: "https://github.com/",
+    },
+  ];
 
   const BornExpDate = [
     {
@@ -173,18 +177,53 @@ export const MainPage = () => {
     },
   ];
 
-  const ProjectDetail = [
+  const ProjectComponents = [
     {
       image: Sun,
       projectName: "Portfolio",
       projectType: "Frontend",
       languageUsed: "NextJs",
-    },
-    {
-      image: Work,
-      projectName: "Portfolio",
-      projectType: "Full-Stack",
-      languageUsed: "NextJs",
+      children: {
+        ProjectSimpleDate: [
+          {
+            TextOne: "Time Frame",
+            TextTwo: "Dec 2023 - Jan 2024",
+          },
+          {
+            TextOne: "Technology",
+            TextTwo: "NextJs, Tailwind Css",
+          },
+          {
+            TextOne: "Category",
+            TextTwo: "Frontend",
+          },
+        ],
+        ToolType: [
+          {
+            selectType: "All",
+          },
+          {
+            selectType: "Language",
+          },
+          {
+            selectType: "Library",
+          },
+        ],
+        Tool: [
+          {
+            title: "About",
+          },
+          {
+            title: "Resume",
+          },
+          {
+            title: "Projects",
+          },
+          {
+            title: "Contact",
+          },
+        ],
+      },
     },
   ];
 
@@ -206,19 +245,20 @@ export const MainPage = () => {
   const ContactInuputs = [
     {
       header: "Name",
+      name: "from_name",
       placeholder: "Enter your name",
-      height: 70,
     },
     {
       header: "Email",
+      name: "user_email",
+
       placeholder: "Enter your email address",
-      height: 70,
     },
     ,
     {
       header: "Message",
+      name: "message",
       placeholder: "Enter your message",
-      height: 250,
     },
   ];
 
@@ -246,10 +286,53 @@ export const MainPage = () => {
   ];
 
   const maxSteps = images.length;
+
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
+
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+
+  const handleStepChange = (step: number) => {
+    setActiveStep(step);
+  };
+
+  const navigateToURL = (url: string) => {
+    window.open(url, "_blank");
+  };
+
+  const sendEmail = (e: any) => {
+    e.preventDefault();
+    if (form.current) {
+      emailjs
+        .sendForm("service_5ql0f2x", "template_ji578fl", form.current, {
+          publicKey: "gEBYwQ8j4VVHCthWg",
+        })
+        .then(
+          () => {
+            console.log("SUCCESS!");
+            form?.current?.reset();
+            enqueueSnackbar("Request successful", { variant: "success" });
+          },
+          (error: { text: any }) => {
+            console.log("FAILED...", error.text);
+          }
+        );
+    }
+  };
+
+  const mode = localStorage.getItem("Mode");
+  // useEffect(() => {
+  //   setMode(localStorage.getItem("Mode"));
+  // }, [mode]);
+
+  console.log("typeOf22222", mode);
   return (
-    <div className={mode}>
+    <div className={mode == "true" ? "dark" : ""}>
       {/* Name and Pic ~ White BG */}
-      <div className="py-14 mt-10 bg-[#FFF] dark:bg-[#181e27]">
+      <div className="pb-14 pt-24 bg-[#FFF] dark:bg-[#181e27]">
         <div className="w-full flex flex-col items-center md:flex-row md:justify-center">
           <CustomImage src={Sun} alt={"pic"} height={100} width={100} />
           <div className="md:max-w-[570px] md:ml-8 mt-5 md:mt-0 ">
@@ -269,16 +352,21 @@ export const MainPage = () => {
                 text={"I am a FrontEnd Developer based in Islamabad, Pakistan."}
               />
               <div className="flex gap-2 mt-4 md:mt-6">
-                <Button
-                  imageSrc={Linkedin}
-                  imageAlert={"Linkedin"}
-                  imageHeight={34}
-                />
-                <Button
-                  imageSrc={Github}
-                  imageAlert={"Github"}
-                  imageHeight={34}
-                />
+                {socialMedia.map((item, key) => {
+                  return (
+                    <div
+                      className=""
+                      key={key}
+                      onClick={() => navigateToURL(item.url)}
+                    >
+                      <Button
+                        imageSrc={item.logo}
+                        imageAlt={"Logo"}
+                        imageHeight={34}
+                      />
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -544,9 +632,15 @@ export const MainPage = () => {
           </div>
 
           <div className="lg:max-w-[1000px] my-10  ">
-            {ProjectDetail.map((item, key) => {
+            {ProjectComponents.map((item, key) => {
               return (
-                <div key={key} className="flex lg:gap-20 gap-10 items-center">
+                <div
+                  key={key}
+                  className="flex lg:gap-20 gap-10 items-center"
+                  onClick={() =>
+                    history.push("/project-detail", { data: item })
+                  }
+                >
                   <ProjectListContainer
                     image={item.image}
                     projectName={item.projectName}
@@ -570,7 +664,7 @@ export const MainPage = () => {
             width={150}
             padding="ml-12"
           />
-          <Box sx={{ maxWidth: 400, flexGrow: 1 }}>
+          {/* <Box sx={{ maxWidth: 400, flexGrow: 1 }}>
             <Paper
               square
               elevation={0}
@@ -602,7 +696,10 @@ export const MainPage = () => {
               enableMouseEvents
             >
               {images.map((step, index) => (
-                <div key={step.label}>
+                <div
+                  key={step.label}
+                  onClick={() => navigateToURL(step.imgPath)}
+                >
                   {Math.abs(activeStep - index) <= 2 ? (
                     <Box
                       component="img"
@@ -649,7 +746,7 @@ export const MainPage = () => {
                 />
               }
             />
-          </Box>
+          </Box> */}
         </div>
       </div>
 
@@ -669,11 +766,10 @@ export const MainPage = () => {
             <div className="flex md:flex-col Fivess:flex-row flex-col Fivess:gap-10 ml-10">
               {ContactSideData.map((item, key) => {
                 return (
-                  <div key={key} className="w-full  md:w-auto md:mb-0 md:mr-5">
+                  <div key={key} className="w-full md:w-auto md:mb-0 md:mr-5">
                     <SideInfo
                       icon={item.icon}
                       data={item.data}
-                      divStyling="mb-5"
                       dataSize="md:text-lg text-sm"
                     />
                   </div>
@@ -681,9 +777,9 @@ export const MainPage = () => {
               })}
             </div>
             <div className="w-full md:border-l-2 md:border-gray-500 p-10 ">
-              {ContactInuputs.map((item, key) => {
-                return (
-                  <div key={key}>
+              <form ref={form} onSubmit={sendEmail}>
+                {ContactInuputs.map((item, key) => (
+                  <div key={key} className="mb-5">
                     <Text
                       text={item?.header}
                       textColor={"text-[#1c2528]"}
@@ -694,23 +790,26 @@ export const MainPage = () => {
                     <TextField
                       id="outlined-number"
                       multiline
-                      className="w-[100%] mb-5"
+                      className="w-[100%] "
+                      name={item?.name}
+                      placeholder={item?.placeholder}
                     />
                   </div>
-                );
-              })}
+                ))}
 
-              <Button
-                buttonBackgroundColor="bg-none hover:bg-[#ff8059] text-[#1c2528] hover:text-[#FFF] "
-                buttonBorderColor="border-2 border-[#ff8059]"
-                hoverStyle="transition-all duration-500 ease-in-out"
-                padding="my-4"
-                buttonWith="md:w-56 w-34"
-                buttonInsideText="Submit"
-                buttonInsideFontWeight="font-bold"
-                buttonInsideTextColor=" "
-                buttonInsideTextSize="text-lg"
-              />
+                <Button
+                  type={"submit"}
+                  buttonBackgroundColor="bg-none hover:bg-[#ff8059] text-[#1c2528] hover:text-[#FFF] "
+                  buttonBorderColor="border-2 border-[#ff8059]"
+                  hoverStyle="transition-all duration-500 ease-in-out"
+                  padding="my-4"
+                  buttonWith="md:w-56 w-34"
+                  buttonInsideText="Submit"
+                  buttonInsideFontWeight="font-bold"
+                  buttonInsideTextColor=" "
+                  buttonInsideTextSize="text-lg"
+                />
+              </form>
             </div>
           </div>
         </div>

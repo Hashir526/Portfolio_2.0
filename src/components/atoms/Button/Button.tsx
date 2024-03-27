@@ -15,7 +15,7 @@ export function Button({
   imageSrc,
   imageWidth,
   imageHeight,
-  imageAlert,
+  imageAlt,
   type,
   isLoading = false,
   handleOnClick,
@@ -23,6 +23,7 @@ export function Button({
   buttonInsideTextColor,
   buttonInsideTextSize,
   buttonInsideFontWeight,
+  imageCheck = false,
 }: {
   disabled?: boolean;
 
@@ -38,7 +39,7 @@ export function Button({
   imageSrc?: any;
   imageWidth?: any;
   imageHeight?: any;
-  imageAlert?: any;
+  imageAlt?: any;
   type?: any;
   isLoading?: boolean;
   handleOnClick?: () => void;
@@ -46,6 +47,7 @@ export function Button({
   buttonInsideTextColor?: string;
   buttonInsideTextSize?: string;
   buttonInsideFontWeight?: string;
+  imageCheck?: boolean;
 }) {
   return (
     <>
@@ -74,12 +76,12 @@ export function Button({
               textSize={buttonInsideTextSize}
               fontWeight={buttonInsideFontWeight}
             />
-            {imageSrc !== null ? (
+            {imageCheck !== false ? (
               <CustomImage
-                src={imageSrc}
-                width={imageHeight}
-                height={imageWidth}
-                alt={imageAlert}
+                src={imageSrc ? imageSrc : ""}
+                width={imageWidth}
+                height={imageHeight}
+                alt={imageAlt ? imageAlt : " "}
               />
             ) : null}
           </>
