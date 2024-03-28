@@ -25,11 +25,11 @@ export const SideInfo = ({
       <DoubleTextContainer
         textContainerOne={data}
         textContainerOneSize={`${dataSize ? dataSize : "text-4xl"}`}
-        textContainerOneColor={"text-[#1c2528]"}
+        textContainerOneColor={"text-[#1c2528]  dark:text-[#FFF]"}
         textContainerOneFontWeight="font-bold"
         textContainerTwo={text}
         textContainerTwoSize={`${textSize ? textSize : "text-xl"}`}
-        textContainerTwoColor={"text-[#3c4649]"}
+        textContainerTwoColor={"text-[#3c4649]  dark:text-[#bdc1c7]"}
       />
     </div>
   );

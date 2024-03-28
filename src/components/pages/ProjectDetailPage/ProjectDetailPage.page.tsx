@@ -1,10 +1,10 @@
 import React from "react";
 import { ProjectDetail } from "@organisms";
 
-export const ProjectDetailPage = ({ data }: { data: any }) => {
+export const ProjectDetailPage = () => {
   return (
     <>
-      <ProjectDetail data={data} />
+      <ProjectDetail />
     </>
   );
 };

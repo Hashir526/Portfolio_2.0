@@ -3,6 +3,10 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 
 import { Navbar } from "@organisms";
+
+import { DarkModeState } from "../context/DarkMode/DarkModeState";
+import { ProjectDataState } from "../context/ProjectData/ProjectDataState";
+
 // import { SnackbarProvider } from "notistack";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -31,8 +35,12 @@ export default function RootLayout({
           <Navbar />
           {children}
         </SnackbarProvider>*/}
-        <Navbar />
-        {children}
+        <ProjectDataState>
+          <DarkModeState>
+            <Navbar />
+            {children}
+          </DarkModeState>
+        </ProjectDataState>
       </body>
     </html>
   );

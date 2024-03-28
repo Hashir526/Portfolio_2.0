@@ -14,7 +14,7 @@ export const ProjectListContainer = ({
   languageUsed: string;
 }) => {
   return (
-    <div className="hover:cursor-pointer hover:opacity-70 flex justify-center items-center lg:m-20 m-10">
+    <div className="hover:cursor-pointer hover:opacity-70 flex justify-center items-center lg:m-20 m-10 gap-10">
       <div className="">
         <CustomImage src={image} alt={"image"} height={100} width={500} />
       </div>
@@ -22,15 +22,15 @@ export const ProjectListContainer = ({
         <TripleTextContainer
           textContainerOne={projectName}
           textContainerOneSize={"lg:text-8xl md:text-4xl text-2xl"}
-          textContainerOneColor={"text-[#1c2528]"}
+          textContainerOneColor={"text-[#1c2528] dark:text-[#FFF]"}
           textContainerOneFontWeight="font-semibold"
           textContainerOnePadding="pb-8"
           textContainerTwo={projectType}
           textContainerTwoSize={"lg:text-3xl md:text-xl text-base"}
-          textContainerTwoColor={"#3c4649"}
+          textContainerTwoColor={"text-[#3c4649] dark:text-[#bdc1c7]"}
           textContainerThree={languageUsed}
           textContainerThreeSize={"lg:text-3xl md:text-xl text-base"}
-          textContainerThreeColor={"#3c4649"}
+          textContainerThreeColor={"text-[#3c4649] dark:text-[#bdc1c7]"}
         />
       </div>
     </div>

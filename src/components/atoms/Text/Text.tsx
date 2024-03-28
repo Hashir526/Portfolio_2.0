@@ -33,7 +33,7 @@ export const Text = ({
         className={`${
           textSize ? `${textSize}` : "text-xl"
         } ${underlineText} ${padding}  ${fontWeight} ${
-          textColor ? `${textColor}` : "text-[#3c4649]"
+          textColor ? `${textColor}` : "text-[#3c4649] dark:text-[#bdc1c7]"
         } ${textAlign} ${borderColor} ${border} ${width} ${cursorShape} ${fontFamily}`}
       >
         {text}

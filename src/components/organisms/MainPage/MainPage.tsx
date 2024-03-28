@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 
 import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -8,6 +8,7 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
+import { TextField } from "@mui/material";
 
 import { enqueueSnackbar } from "notistack";
 
@@ -36,20 +37,27 @@ import Mail from "./../../../assets/svg/Mail.svg";
 import Location from "./../../../assets/svg/Location.svg";
 import KeyboardArrowLeft from "./../../../assets/svg/LeftArrow.svg";
 import KeyboardArrowRight from "./../../../assets/svg/RightArrow.svg";
-import { TextField } from "@mui/material";
-import { ProjectDetail } from "@organisms";
+
+import Try from "./../../../assets/img/try.jpg";
+
+import { DarkModeContext } from "../../../context/DarkMode/DarkModeContext";
+import { ProjectDataContext } from "../../../context/ProjectData/ProjectDataContext";
 
 export const MainPage = () => {
   const router = useRouter();
 
   const form = useRef<HTMLFormElement | null>(null);
 
+  const { darkMode } = useContext(DarkModeContext);
+
+  const { setData } = useContext(ProjectDataContext);
+
   const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
   const theme = useTheme();
+
   const [activeStep, setActiveStep] = React.useState(0);
-  // const [mode, setMode] = useState<any>();
-console.log("s")
+
   const socialMedia = [
     {
       logo: Linkedin,
@@ -179,10 +187,12 @@ console.log("s")
 
   const ProjectComponents = [
     {
-      image: Sun,
+      image: Try,
       projectName: "Portfolio",
       projectType: "Frontend",
       languageUsed: "NextJs",
+      summary:
+        "I'm a recent Software Engineering graduate with a passion for frontend development. Skilled in HTML, CSS, Bootstrap, JavaScript, and SEO, I transform design concepts into user-friendly websites. I'm dedicated to continuous learning and eager to collaborate on exciting web projects. ",
       children: {
         ProjectSimpleDate: [
           {
@@ -221,6 +231,11 @@ console.log("s")
           },
           {
             title: "Contact",
+          },
+        ],
+        images: [
+          {
+            src: Try,
           },
         ],
       },
@@ -323,14 +338,13 @@ console.log("s")
     }
   };
 
-  const mode = localStorage.getItem("Mode");
-  // useEffect(() => {
-  //   setMode(localStorage.getItem("Mode"));
-  // }, [mode]);
+  const handleClick = (item: any) => {
+    setData(item);
+    router.push("/app/project-detail");
+  };
 
-  console.log("typeOf22222", mode);
   return (
-    <div className={mode == "true" ? "dark" : ""}>
+    <div className={darkMode ? "" : "dark"}>
       {/* Name and Pic ~ White BG */}
       <div className="pb-14 pt-24 bg-[#FFF] dark:bg-[#181e27]">
         <div className="w-full flex flex-col items-center md:flex-row md:justify-center">
@@ -339,15 +353,15 @@ console.log("s")
             <DoubleTextContainer
               textContainerOne={"FrontEnd Developer"}
               textContainerOneSize={"lg:text-4xl md:text-2xl text-xl"}
-              textContainerOneColor={"font-sans"}
-              textContainerOneFontWeight={"text-[#3c4649]"}
+              textContainerOneColor={"text-[#3c4649] dark:text-[#bdc1c7]"}
+              textContainerOneFontWeight={"font-sans"}
               textContainerTwo={"Hashir Khurram"}
               textContainerTwoSize={"lg:text-9xl md:text-7xl text-4xl"}
-              textContainerTwoColor={"text-[#1c2528]"}
+              textContainerTwoColor={"text-[#1c2528] dark:text-[#FFF]"}
               textContainerTwoFontWeight={"font-sans"}
               textContainerPadding="ml-7"
             />
-            <div className="md:border-l-2 md:border-gray-500 p-7 mt-5 md:mt-0">
+            <div className="md:border-l-2 md:border-gray-500 dark:md:border-white p-7 mt-5 md:mt-0">
               <Text
                 text={"I am a FrontEnd Developer based in Islamabad, Pakistan."}
               />
@@ -363,6 +377,7 @@ console.log("s")
                         imageSrc={item.logo}
                         imageAlt={"Logo"}
                         imageHeight={34}
+                        imageCheck={true}
                       />
                     </div>
                   );
@@ -377,10 +392,10 @@ console.log("s")
               key={key}
               textContainerOne={item.TextOne}
               textContainerOneSize={"text-xl"}
-              textContainerOneColor={"text-[#3c4649]"}
+              textContainerOneColor={"text-[#3c4649] dark:text-[#bdc1c7]"}
               textContainerTwo={item.TextTwo}
               textContainerTwoSize={"text-xl"}
-              textContainerTwoColor={"text-[#1c2528]"}
+              textContainerTwoColor={"text-[#1c2528] dark:text-[#FFF]"}
               textContainerTwoFontWeight="font-bold"
               textContainerPadding="mt-3 md:mt-0 md:ml-6"
             />
@@ -389,13 +404,16 @@ console.log("s")
       </div>
 
       {/* About Me ~ #ebe7e0 BG  */}
-      <div className="bg-[#ebe7e0] dark:bg-[#6c757d] py-14 w-full flex justify-center items-center">
+      <div
+        id="About"
+        className="bg-[#ebe7e0] dark:bg-[#222A36] py-14 w-full flex justify-center items-center"
+      >
         <div className="content-center ">
           <div className="text-center">
             <Text
               text={"About Me"}
               textSize={"lg:text-9xl md:text-7xl text-4xl "}
-              textColor={"text-[#1c2528]"}
+              textColor={"text-[#1c2528] dark:text-[#FFF]"}
               fontFamily="font-[Sorts Mill Goudy]"
             />
           </div>
@@ -415,7 +433,7 @@ console.log("s")
                 );
               })}
             </div>
-            <div className="max-w-[750px] lg:border-l-2 lg:border-gray-500 p-10 ">
+            <div className="max-w-[750px] lg:border-l-2 lg:border-gray-500 dark:md:border-white p-10 ">
               <Text
                 text={
                   "I'm a recent Software Engineering graduate with a passion for frontend development. Skilled in HTML, CSS, Bootstrap, JavaScript, and SEO, I transform design concepts into user-friendly websites. I'm dedicated to continuous learning and eager to collaborate on exciting web projects. "
@@ -423,7 +441,7 @@ console.log("s")
                 padding="mb-10"
               />
               <Button
-                buttonBackgroundColor="bg-none hover:bg-[#ff8059] text-[#1c2528] hover:text-[#FFF] "
+                buttonBackgroundColor="bg-none hover:bg-[#ff8059] text-[#1c2528]  dark:text-[#FFF] hover:text-[#FFF] "
                 buttonBorderColor="border-2 border-[#ff8059]"
                 hoverStyle="transition-all duration-500 ease-in-out"
                 padding="my-4"
@@ -439,18 +457,21 @@ console.log("s")
       </div>
 
       {/* My Resume ~ White BG */}
-      <div className="bg-[#FFF] dark:bg-[#181e27] py-14 w-full flex justify-center items-center">
+      <div
+        id="Resume"
+        className="bg-[#FFF] dark:bg-[#181e27] py-14 w-full flex justify-center items-center"
+      >
         <div className="content-center ">
           <div className="text-center">
             <Text
               text={"My Resume"}
               textSize={"lg:text-9xl md:text-7xl text-4xl "}
-              textColor={"text-[#1c2528]"}
+              textColor={"text-[#1c2528] dark:text-[#FFF]"}
               fontFamily="font-[Sorts Mill Goudy]"
             />
           </div>
 
-          <div className="max-w-[1000px] md:border-l-2 md:border-gray-500 p-8 md:mt-10  ">
+          <div className="max-w-[1000px] md:border-l-2 md:border-gray-500 dark:md:border-white p-8 md:mt-10  ">
             <div className="p-7 lg:mb-10">
               <Text
                 text={
@@ -463,7 +484,7 @@ console.log("s")
                 text={"SKILLS"}
                 textSize={"lg:text-4xl text-2xl "}
                 fontWeight="font-bold"
-                textColor={"text-[#1c2528]"}
+                textColor={"text-[#1c2528]  dark:text-[#FFF]"}
                 padding="pb-10"
               />
               {Skills.map((item, key) => {
@@ -481,14 +502,14 @@ console.log("s")
               })}
             </div>
             <div className="flex p-7">
-              <div className="flex md:gap-48  flex-wrap ">
+              <div className="flex md:gap-48 gap-10  flex-wrap ">
                 <div>
                   <div className="">
                     <Text
                       text={"Education"}
                       textSize={"lg:text-4xl text-2xl"}
                       fontWeight="font-bold"
-                      textColor={"text-[#1c2528]"}
+                      textColor={"text-[#1c2528]  dark:text-[#FFF]"}
                       padding="pb-10"
                     />
                     {EducationData.map((item, key) => {
@@ -497,14 +518,20 @@ console.log("s")
                           <TripleTextContainer
                             textContainerOne={`${item.startTime}-${item.endTime}`}
                             textContainerOneSize={"lg:text-xl text-base"}
-                            textContainerOneColor={"text-[#3c4649]"}
+                            textContainerOneColor={
+                              "text-[#3c4649] dark:text-[#bdc1c7]"
+                            }
                             textContainerTwo={item.degree}
-                            textContainerTwoSize={"text-2xl"}
-                            textContainerTwoColor={"text-[#1c2528]"}
+                            textContainerTwoSize={"lg:text-2xl text-lg"}
+                            textContainerTwoColor={
+                              "text-[#1c2528]  dark:text-[#FFF]"
+                            }
                             textContainerTwoFontWeight="font-bold"
                             textContainerThree={item.institute}
                             textContainerThreeSize={"lg:text-xl text-base"}
-                            textContainerThreeColor={"text-[#3c4649]"}
+                            textContainerThreeColor={
+                              "text-[#3c4649]  dark:text-[#bdc1c7]"
+                            }
                           />
                         </div>
                       );
@@ -515,7 +542,7 @@ console.log("s")
                       text={"Course"}
                       textSize={"lg:text-4xl text-2xl"}
                       fontWeight="font-bold"
-                      textColor={"text-[#1c2528]"}
+                      textColor={"text-[#1c2528]  dark:text-[#FFF]"}
                       padding="pb-10"
                     />
                     {Course.map((item, key) => {
@@ -524,14 +551,20 @@ console.log("s")
                           <TripleTextContainer
                             textContainerOne={`${item.startTime}-${item.endTime}`}
                             textContainerOneSize={"lg:text-xl text-base"}
-                            textContainerOneColor={"text-[#3c4649]"}
+                            textContainerOneColor={
+                              "text-[#3c4649]  dark:text-[#bdc1c7]"
+                            }
                             textContainerTwo={item.degree}
                             textContainerTwoSize={"lg:text-2xl text-lg"}
-                            textContainerTwoColor={"text-[#1c2528]"}
+                            textContainerTwoColor={
+                              "text-[#1c2528]  dark:text-[#FFF]"
+                            }
                             textContainerTwoFontWeight="font-bold"
                             textContainerThree={item.institute}
                             textContainerThreeSize={"lg:text-xl text-base"}
-                            textContainerThreeColor={"text-[#3c4649]"}
+                            textContainerThreeColor={
+                              "text-[#3c4649]  dark:text-[#bdc1c7]"
+                            }
                           />
                         </div>
                       );
@@ -544,7 +577,7 @@ console.log("s")
                       text={"Experience"}
                       textSize={"lg:text-4xl text-2xl"}
                       fontWeight="font-bold"
-                      textColor={"text-[#1c2528]"}
+                      textColor={"text-[#1c2528]  dark:text-[#FFF]"}
                       padding="pb-10"
                     />
                     {WorkExperience.map((item, key) => {
@@ -553,19 +586,25 @@ console.log("s")
                           <TripleTextContainer
                             textContainerOne={`${item.startTime}-${item.endTime}`}
                             textContainerOneSize={"lg:text-xl text-base"}
-                            textContainerOneColor={"text-[#3c4649]"}
+                            textContainerOneColor={
+                              "text-[#3c4649]  dark:text-[#bdc1c7]"
+                            }
                             textContainerTwo={item.institute}
-                            textContainerTwoSize={"text-2xl"}
-                            textContainerTwoColor={"text-[#1c2528]"}
+                            textContainerTwoSize={"lg:text-2xl text-lg"}
+                            textContainerTwoColor={
+                              "text-[#1c2528]  dark:text-[#FFF]"
+                            }
                             textContainerTwoFontWeight="font-bold"
                             textContainerThree={item.position}
                             textContainerThreeSize={"lg:text-xl text-base"}
-                            textContainerThreeColor={"text-[#3c4649]"}
+                            textContainerThreeColor={
+                              "text-[#3c4649]  dark:text-[#bdc1c7]"
+                            }
                           />
                           <Text
                             text={item.detail}
                             textSize={"lg:text-xl text-base"}
-                            textColor={"text-[#1c2528]"}
+                            textColor={"text-[#1c2528]  dark:text-[#bdc1c7]"}
                             padding="mt-4 mb-12"
                           />
                         </div>
@@ -576,7 +615,7 @@ console.log("s")
               </div>
             </div>
             <Button
-              buttonBackgroundColor="bg-none hover:bg-[#ff8059] text-[#1c2528] hover:text-[#FFF] "
+              buttonBackgroundColor="bg-none hover:bg-[#ff8059] text-[#1c2528]  dark:text-[#FFF] hover:text-[#FFF] "
               buttonBorderColor="border-2 border-[#ff8059]"
               hoverStyle="transition-all duration-500 ease-in-out"
               padding="ml-7"
@@ -591,19 +630,21 @@ console.log("s")
       </div>
 
       {/* My Project ~ #ebe7e0 BG  */}
-
-      <div className="bg-[#ebe7e0] dark:bg-[#6c757d] py-14 w-full flex justify-center items-center">
+      <div
+        id="Projects"
+        className="bg-[#ebe7e0] dark:bg-[#222A36] py-14 w-full flex justify-center items-center"
+      >
         <div className="content-center ">
           <div className="text-center">
             <Text
               text={"My Projects"}
               textSize={"lg:text-9xl md:text-7xl text-4xl "}
-              textColor={"text-[#1c2528]"}
+              textColor={"text-[#1c2528] dark:text-[#FFF]"}
               fontFamily="font-[Sorts Mill Goudy]"
             />
           </div>
 
-          <div className="lg:max-w-[1000px] lg:border-l-2 lg:border-gray-500 p-8 my-10 ">
+          <div className="lg:max-w-[1000px] lg:border-l-2 lg:border-gray-500 dark:md:border-white p-8 my-10 ">
             <div className="p-7 ">
               <Text
                 text={
@@ -620,10 +661,10 @@ console.log("s")
                   <Button
                     buttonBackgroundColor="bg-none"
                     buttonInsideText={item.selectType}
-                    buttonInsideTextColor="text-black"
+                    buttonInsideTextColor="text-black  dark:text-[#FFF]"
                     buttonInsideTextSize="lg:text-4xl md:text-2xl Fivess:text-lg text-2xl"
                     buttonInsideFontWeight="font-bold"
-                    buttonRadius="rounded-none border-[#ebe7e0] border-b-4"
+                    buttonRadius="rounded-none border-[#ebe7e0]  dark:border-[#222A36] border-b-4"
                     hoverStyle="hover:border-b-4 hover:border-[#ff8059]"
                   />
                 </div>
@@ -634,12 +675,19 @@ console.log("s")
           <div className="lg:max-w-[1000px] my-10  ">
             {ProjectComponents.map((item, key) => {
               return (
+                // <Link
+                //   key={key}
+                //   href={{
+                //     pathname: "/app/project-detail",
+                //     query: {
+                //       data: JSON.stringify(item),
+                //     },
+                //   }}
+                // >
                 <div
                   key={key}
-                  className="flex lg:gap-20 gap-10 items-center"
-                  onClick={() =>
-                    history.push("/project-detail", { data: item })
-                  }
+                  className="flex  items-center"
+                  onClick={() => handleClick(item)}
                 >
                   <ProjectListContainer
                     image={item.image}
@@ -648,6 +696,7 @@ console.log("s")
                     languageUsed={item.languageUsed}
                   />
                 </div>
+                // </Link>
               );
             })}
           </div>
@@ -751,13 +800,16 @@ console.log("s")
       </div>
 
       {/* Contact ~ #ebe7e0 BG  */}
-      <div className="bg-[#ebe7e0] dark:bg-[#6c757d] py-14 w-full flex justify-center items-center">
+      <div
+        id="Contact"
+        className="bg-[#ebe7e0] dark:bg-[#222A36] py-14 w-full flex justify-center items-center"
+      >
         <div className="content-center ">
           <div className="text-center">
             <Text
               text={"Contact Me"}
               textSize={"lg:text-9xl md:text-7xl text-4xl "}
-              textColor={"text-[#1c2528]"}
+              textColor={"text-[#1c2528] dark:text-[#FFF]"}
               fontFamily="font-[Sorts Mill Goudy]"
             />
           </div>
@@ -782,7 +834,7 @@ console.log("s")
                   <div key={key} className="mb-5">
                     <Text
                       text={item?.header}
-                      textColor={"text-[#1c2528]"}
+                      textColor={"text-[#1c2528] dark:text-[#FFF]"}
                       fontWeight="font-bold"
                       textSize={"md:text-2xl text-lg"}
                       padding="mb-2"
@@ -799,7 +851,7 @@ console.log("s")
 
                 <Button
                   type={"submit"}
-                  buttonBackgroundColor="bg-none hover:bg-[#ff8059] text-[#1c2528] hover:text-[#FFF] "
+                  buttonBackgroundColor="bg-none hover:bg-[#ff8059] text-[#1c2528] dark:text-[#FFF] hover:text-[#FFF] "
                   buttonBorderColor="border-2 border-[#ff8059]"
                   hoverStyle="transition-all duration-500 ease-in-out"
                   padding="my-4"

@@ -19,13 +19,13 @@ export const SkillInfoContainer = ({
         text={language}
         textSize={"md:text-3xl text-xl"}
         fontWeight="font-bold"
-        textColor={"text-[#1c2528] "}
+        textColor={"text-[#1c2528]  dark:text-[#FFF] "}
       />
       <Rate
         disabled
         defaultValue={grip}
         count={10}
-        character={<XFilled />}
+        character={<XFilled style={{ backgroundColor: "grey" }} />}
         style={{ color: "#ff8059" }}
         className="hidden sm:block"
       />
