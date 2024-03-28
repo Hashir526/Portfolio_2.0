@@ -675,15 +675,7 @@ export const MainPage = () => {
           <div className="lg:max-w-[1000px] my-10  ">
             {ProjectComponents.map((item, key) => {
               return (
-                // <Link
-                //   key={key}
-                //   href={{
-                //     pathname: "/app/project-detail",
-                //     query: {
-                //       data: JSON.stringify(item),
-                //     },
-                //   }}
-                // >
+               
                 <div
                   key={key}
                   className="flex  items-center"
@@ -696,7 +688,6 @@ export const MainPage = () => {
                     languageUsed={item.languageUsed}
                   />
                 </div>
-                // </Link>
               );
             })}
           </div>
