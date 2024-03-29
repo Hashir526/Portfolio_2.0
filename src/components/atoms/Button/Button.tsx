@@ -43,7 +43,7 @@ export function Button({
   type?: any;
   isLoading?: boolean;
   handleOnClick?: () => void;
-  buttonInsideText?: string;
+  buttonInsideText?: any;
   buttonInsideTextColor?: string;
   buttonInsideTextSize?: string;
   buttonInsideFontWeight?: string;

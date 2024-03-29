@@ -40,6 +40,7 @@ import KeyboardArrowRight from "./../../../assets/svg/RightArrow.svg";
 
 import Try from "./../../../assets/img/try.jpg";
 
+
 import { DarkModeContext } from "../../../context/DarkMode/DarkModeContext";
 import { ProjectDataContext } from "../../../context/ProjectData/ProjectDataContext";
 
@@ -343,6 +344,14 @@ export const MainPage = () => {
     router.push("/app/project-detail");
   };
 
+  const downloadButton = () => {
+    return (
+      <a href="./../../../assets/pdf/Hashir-Khurram.pdf" download="Hashir-Khurram">
+        Download CV
+      </a>
+    );
+  };
+
   return (
     <div className={darkMode ? "" : "dark"}>
       {/* Name and Pic ~ White BG */}
@@ -615,16 +624,16 @@ export const MainPage = () => {
               </div>
             </div>
             <Button
-              buttonBackgroundColor="bg-none hover:bg-[#ff8059] text-[#1c2528]  dark:text-[#FFF] hover:text-[#FFF] "
-              buttonBorderColor="border-2 border-[#ff8059]"
-              hoverStyle="transition-all duration-500 ease-in-out"
-              padding="ml-7"
-              buttonWith="md:w-56 w-34"
-              buttonInsideText="Download CV"
-              buttonInsideFontWeight="font-bold"
-              buttonInsideTextColor=" "
-              buttonInsideTextSize="text-lg"
-            />
+  buttonBackgroundColor="bg-none hover:bg-[#ff8059] text-[#1c2528] dark:text-[#FFF] hover:text-[#FFF]"
+  buttonBorderColor="border-2 border-[#ff8059]"
+  hoverStyle="transition-all duration-500 ease-in-out"
+  padding="my-4"
+  buttonWith="md:w-56 w-34"
+  buttonInsideText={downloadButton()} // Including the downloadButton function here
+  buttonInsideFontWeight="font-bold"
+  buttonInsideTextColor=""
+  buttonInsideTextSize="text-lg"
+/>
           </div>
         </div>
       </div>
