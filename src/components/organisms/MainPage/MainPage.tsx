@@ -343,6 +343,10 @@ export const MainPage = () => {
     router.push("/app/project-detail");
   };
 
+  const downloadButton = () => {
+    return window.open("./../../../assets/pdf/Hashir-Khurram.pdf", "_blank");
+  };
+
   return (
     <div className={darkMode ? "" : "dark"}>
       {/* Name and Pic ~ White BG */}
@@ -615,15 +619,16 @@ export const MainPage = () => {
               </div>
             </div>
             <Button
-              buttonBackgroundColor="bg-none hover:bg-[#ff8059] text-[#1c2528]  dark:text-[#FFF] hover:text-[#FFF] "
+              buttonBackgroundColor="bg-none hover:bg-[#ff8059] text-[#1c2528] dark:text-[#FFF] hover:text-[#FFF]"
               buttonBorderColor="border-2 border-[#ff8059]"
               hoverStyle="transition-all duration-500 ease-in-out"
-              padding="ml-7"
+              padding="my-4"
               buttonWith="md:w-56 w-34"
-              buttonInsideText="Download CV"
+              buttonInsideText={"Download CV"}
               buttonInsideFontWeight="font-bold"
               buttonInsideTextColor=" "
               buttonInsideTextSize="text-lg"
+              handleOnClick={() => downloadButton()}
             />
           </div>
         </div>
