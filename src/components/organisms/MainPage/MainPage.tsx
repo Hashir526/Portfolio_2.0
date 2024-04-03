@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 
 import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -675,7 +675,6 @@ export const MainPage = () => {
           <div className="lg:max-w-[1000px] my-10  ">
             {ProjectComponents.map((item, key) => {
               return (
-               
                 <div
                   key={key}
                   className="flex  items-center"
