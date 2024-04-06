@@ -43,7 +43,6 @@ import Try from "./../../../assets/img/try.jpg";
 import { DarkModeContext } from "../../../context/DarkMode/DarkModeContext";
 import { ProjectDataContext } from "../../../context/ProjectData/ProjectDataContext";
 
-console.log("ss")
 export const MainPage = () => {
   const router = useRouter();
 
