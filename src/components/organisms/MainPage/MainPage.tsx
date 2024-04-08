@@ -26,9 +26,13 @@ import {
   TripleTextContainer,
 } from "@molecules";
 
+// import { GithubOutlined,LinkedinOutlined   } from "@ant-design/icons";
+
 import Sun from "./../../../assets/svg/Sun.svg";
 import Linkedin from "./../../../assets/svg/Linkedin.svg";
+import LindedinDark from "./../../../assets/svg/LindedinDarkMode.svg";
 import Github from "./../../../assets/svg/Github.svg";
+import GithubDark from "./../../../assets/svg/GithubDarkMode.svg";
 import Check from "././../../../assets/svg/Check.svg";
 import Work from "./../../../assets/svg/Work.svg";
 import Review from "./../../../assets/svg/Review.svg";
