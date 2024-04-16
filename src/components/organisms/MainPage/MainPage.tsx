@@ -1,14 +1,11 @@
 "use client";
 import React, { useContext, useRef, useState } from "react";
 
-import { useTheme } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import MobileStepper from "@mui/material/MobileStepper";
-import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
-import SwipeableViews from "react-swipeable-views";
-import { autoPlay } from "react-swipeable-views-utils";
 import { TextField } from "@mui/material";
+
+import { Carousel } from "antd";
+
+// import { Carousel } from "react-responsive-carousel";
 
 import { enqueueSnackbar } from "notistack";
 
@@ -26,8 +23,6 @@ import {
   TripleTextContainer,
 } from "@molecules";
 
-// import { GithubOutlined,LinkedinOutlined   } from "@ant-design/icons";
-
 import Sun from "./../../../assets/svg/Sun.svg";
 import Linkedin from "./../../../assets/svg/Linkedin.svg";
 import LindedinDark from "./../../../assets/svg/LindedinDarkMode.svg";
@@ -36,6 +31,7 @@ import GithubDark from "./../../../assets/svg/GithubDarkMode.svg";
 import Check from "././../../../assets/svg/Check.svg";
 import Work from "./../../../assets/svg/Work.svg";
 import Review from "./../../../assets/svg/Review.svg";
+import ReviewDark from "./../../../assets/svg/ReviewDarkMode.svg";
 import Phone from "./../../../assets/svg/Phone.svg";
 import Mail from "./../../../assets/svg/Mail.svg";
 import Location from "./../../../assets/svg/Location.svg";
@@ -50,25 +46,21 @@ import { ProjectDataContext } from "../../../context/ProjectData/ProjectDataCont
 export const MainPage = () => {
   const router = useRouter();
 
+  const [projectSelect, SetProjectSelect] = useState("All");
+
   const form = useRef<HTMLFormElement | null>(null);
 
   const { darkMode } = useContext(DarkModeContext);
 
   const { setData } = useContext(ProjectDataContext);
 
-  const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
-
-  const theme = useTheme();
-
-  const [activeStep, setActiveStep] = React.useState(0);
-
   const socialMedia = [
     {
-      logo: Linkedin,
+      logo: darkMode ? Linkedin : LindedinDark,
       url: "https://pk.linkedin.com/",
     },
     {
-      logo: Github,
+      logo: darkMode ? Github : GithubDark,
       url: "https://github.com/",
     },
   ];
@@ -246,6 +238,23 @@ export const MainPage = () => {
     },
   ];
 
+  const ReviewDetails = [
+    {
+      review:
+        "heelo etxt heelo etxt heelo etxt heelo etxt heelo etxt heelo etxt heelo etxt heelo etxt heelo etxt",
+      personName: "Haseeb Farooq",
+      personPosition: "Team Lead",
+      personProfile: "https://www.google.com",
+    },
+    {
+      review:
+        "heelo etxt heelo etxt heelo etxt heelo etxt heelo etxt heelo etxt heelo etxt heelo etxt heelo etxt",
+      personName: "Adnan",
+      personPosition: "Sr. Full Stack Developer",
+      personProfile: "https://www.google.com",
+    },
+  ];
+
   const ContactSideData = [
     {
       icon: Phone,
@@ -280,43 +289,6 @@ export const MainPage = () => {
       placeholder: "Enter your message",
     },
   ];
-
-  const images = [
-    {
-      label: "San Francisco – Oakland Bay Bridge, United States",
-      imgPath:
-        "https://images.unsplash.com/photo-1537944434965-cf4679d1a598?auto=format&fit=crop&w=400&h=250&q=60",
-    },
-    {
-      label: "Bird",
-      imgPath:
-        "https://images.unsplash.com/photo-1538032746644-0212e812a9e7?auto=format&fit=crop&w=400&h=250&q=60",
-    },
-    {
-      label: "Bali, Indonesia",
-      imgPath:
-        "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=400&h=250",
-    },
-    {
-      label: "Goč, Serbia",
-      imgPath:
-        "https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60",
-    },
-  ];
-
-  const maxSteps = images.length;
-
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const handleStepChange = (step: number) => {
-    setActiveStep(step);
-  };
 
   const navigateToURL = (url: string) => {
     window.open(url, "_blank");
@@ -673,20 +645,28 @@ export const MainPage = () => {
                     buttonInsideTextColor="text-black  dark:text-[#FFF]"
                     buttonInsideTextSize="lg:text-4xl md:text-2xl Fivess:text-lg text-2xl"
                     buttonInsideFontWeight="font-bold"
-                    buttonRadius="rounded-none border-[#ebe7e0]  dark:border-[#222A36] border-b-4"
-                    hoverStyle="hover:border-b-4 hover:border-[#ff8059]"
+                    buttonRadius="rounded-none    "
+                    hoverStyle={`hover:border-b-4 hover:border-[#ff8059] ${
+                      item.selectType === projectSelect
+                        ? "border-b-4 border-[#ff8059]"
+                        : "border-b-4 border-[#ebe7e0] dark:border-[#222A36]"
+                    }`}
+                    handleOnClick={() => SetProjectSelect(item.selectType)}
                   />
                 </div>
               );
             })}
           </div>
 
-          <div className="lg:max-w-[1000px] my-10  ">
-            {ProjectComponents.map((item, key) => {
+          <div className="lg:max-w-[1000px] my-10">
+            {ProjectComponents.filter(
+              (item) =>
+                projectSelect === "All" || item.projectType === projectSelect
+            ).map((item, key) => {
               return (
                 <div
                   key={key}
-                  className="flex  items-center"
+                  className="flex items-center"
                   onClick={() => handleClick(item)}
                 >
                   <ProjectListContainer
@@ -706,95 +686,108 @@ export const MainPage = () => {
       <div className="bg-[#FFF] dark:bg-[#181e27] py-14 w-full flex justify-center items-center">
         <div className="content-center flex flex-col items-center">
           <CustomImage
-            src={Review}
+            src={darkMode ? Review : ReviewDark}
             alt={"Review"}
             height={150}
             width={150}
             padding="ml-12"
           />
-          {/* <Box sx={{ maxWidth: 400, flexGrow: 1 }}>
-            <Paper
-              square
-              elevation={0}
-              sx={{
-                display: "flex",
-                height: 50,
-                pl: 2,
-                marginBottom: 5,
-                marginTop: 5,
-                justifyContent: "center",
-                alignItems: "center",
-                bgcolor: "background.default",
-                textAlign: "center",
-              }}
-            >
-              <Typography
-                style={{
-                  margin: "auto",
-                }}
-              >
-                {`"${images[activeStep].label}"`}
-              </Typography>
-            </Paper>
-
-            <AutoPlaySwipeableViews
-              axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-              index={activeStep}
-              onChangeIndex={handleStepChange}
-              enableMouseEvents
-            >
-              {images.map((step, index) => (
+          <Carousel
+            autoplay
+            className="flex items-center justify-center xl:w-[1000px] md:w-[700px] Fivess:w-[400px] w-[200px] my-20 Fivess:h-60 h-80 "
+          >
+            {ReviewDetails.map((item, key) => {
+              return (
                 <div
-                  key={step.label}
-                  onClick={() => navigateToURL(step.imgPath)}
+                  className="flex flex-col items-center justify-center h-full"
+                  key={key}
                 >
-                  {Math.abs(activeStep - index) <= 2 ? (
-                    <Box
-                      component="img"
-                      sx={{
-                        height: 200,
-                        display: "block",
-                        maxWidth: 400,
-                        overflow: "hidden",
-                        width: "50%",
-                        borderRadius: "100%",
-                        margin: "auto",
-                      }}
-                      src={step.imgPath}
-                      alt={step.label}
+                  <div className="text-center mb-5">
+                    <Text
+                      text={`"${item.review}"`}
+                      textColor="dark:text-[#FFF] text-black"
                     />
-                  ) : null}
+                  </div>
+                  <div
+                    onClick={() => navigateToURL(item.personProfile)}
+                    className="mb-5 text-center"
+                  >
+                    <Text
+                      text={item.personName}
+                      cursorShape="cursor-pointer"
+                      fontWeight="font-bold"
+                      textSize="text-3xl"
+                      textColor="dark:text-[#FFF] text-black"
+                    />
+                  </div>
+                  <div className="text-center">
+                    <Text
+                      text={item.personPosition}
+                      textColor="dark:text-[#FFF] text-black"
+                    />
+                  </div>
                 </div>
-              ))}
-            </AutoPlaySwipeableViews>
-            <MobileStepper
-              steps={maxSteps}
-              position="static"
-              activeStep={activeStep}
-              nextButton={
-                <Button
-                  handleOnClick={handleNext}
-                  disabled={activeStep === maxSteps - 1}
-                  imageSrc={
-                    theme.direction === "rtl"
-                      ? KeyboardArrowLeft
-                      : KeyboardArrowRight
-                  }
-                />
-              }
-              backButton={
-                <Button
-                  handleOnClick={handleBack}
-                  disabled={activeStep === 0}
-                  imageSrc={
-                    theme.direction === "rtl"
-                      ? KeyboardArrowRight
-                      : KeyboardArrowLeft
-                  }
-                />
-              }
-            />
-          </Box> */}
+              );
+            })}
+          </Carousel>
+
+          {/* <Carousel showArrows={true}>
+            <div>
+              <p className="legend">Legend 1</p>
+            </div>
+            <div>
+              <p className="legend">Legend 2</p>
+            </div>
+            <div>
+              <p className="legend">Legend 3</p>
+            </div>
+            <div>
+              <p className="legend">Legend 4</p>
+            </div>
+            <div>
+              <p className="legend">Legend 5</p>
+            </div>
+            <div>
+              <p className="legend">Legend 6</p>
+            </div>
+          </Carousel> */}
+
+          {/* <Carousel
+            autoPlay
+            className="flex items-center justify-center xl:w-[1000px] md:w-[700px] Fivess:w-[400px] w-[200px] my-20 Fivess:h-60 h-80"
+          >
+            {ReviewDetails.map((item, key) => (
+              <div
+                className="flex flex-col items-center justify-center h-full"
+                key={key}
+              >
+                <div className="text-center mb-5">
+                  <Text
+                    text={`"${item.review}"`}
+                    textColor="dark:text-[#FFF] text-black"
+                  />
+                </div>
+                <div
+                  onClick={() => navigateToURL(item.personProfile)}
+                  className="mb-5 text-center"
+                >
+                  <Text
+                    text={item.personName}
+                    cursorShape="cursor-pointer"
+                    fontWeight="font-bold"
+                    textSize="text-3xl"
+                    textColor="dark:text-[#FFF] text-black"
+                  />
+                </div>
+                <div className="text-center">
+                  <Text
+                    text={item.personPosition}
+                    textColor="dark:text-[#FFF] text-black"
+                  />
+                </div>
+              </div>
+            ))}
+          </Carousel> */}
         </div>
       </div>
 

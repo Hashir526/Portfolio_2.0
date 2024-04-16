@@ -1,26 +1,18 @@
 "use client";
-import React, { useContext } from "react";
-
+import React, { useContext, useRef } from "react";
 import { useRouter } from "next/navigation";
-
 import Modal from "@mui/material/Modal";
-
 import { Button } from "@atoms";
-
 import Cross from "./../../../assets/svg/Cross.svg";
 import CrossDarkMode from "./../../../assets/svg/CrossDarkMode.svg";
 import Bar from "./../../../assets/svg/Bar.svg";
 import BarDarkMode from "./../../../assets/svg/BarDarkMode.svg";
-
 import { DarkModeContext } from "../../../context/DarkMode/DarkModeContext";
 
 export const Dropdown = () => {
   const { darkMode } = useContext(DarkModeContext);
-
   const [open, setOpen] = React.useState(false);
-
   const router = useRouter();
-
   const Pages = [
     {
       title: "About",
@@ -35,19 +27,16 @@ export const Dropdown = () => {
       title: "Contact",
     },
   ];
-
   const handleOpen = () => setOpen(true);
-
   const handleClose = () => setOpen(false);
-
-  const handleClick = (item: any) => {
-    const sectionId = item.toLowerCase(); // Ensure sectionId matches the id attribute of your sections
+  const handleClick = (item: string) => {
+    const sectionId = item.toLowerCase();
     const section = document.getElementById(sectionId);
     if (section) {
       section.scrollIntoView({ behavior: "smooth" });
     }
+    handleClose();
   };
-
   return (
     <div>
       <Button
@@ -74,7 +63,6 @@ export const Dropdown = () => {
               imageCheck={true}
             />
           </div>
-
           <div className="flex flex-col justify-center items-center gap-14 mt-16">
             {Pages.map((item, key) => (
               <div key={key}>
