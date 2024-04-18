@@ -49,7 +49,6 @@ export const Dropdown = () => {
       window.scrollTo({ top: ref.current.offsetTop, behavior: "smooth" });
       handleClose();
     }
-    console.log("first", ref.current);
   };
 
   return (
