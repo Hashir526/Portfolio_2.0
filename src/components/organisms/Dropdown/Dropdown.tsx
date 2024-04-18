@@ -11,32 +11,47 @@ import { DarkModeContext } from "../../../context/DarkMode/DarkModeContext";
 
 export const Dropdown = () => {
   const { darkMode } = useContext(DarkModeContext);
+
   const [open, setOpen] = React.useState(false);
+
   const router = useRouter();
+
+  const section1 = useRef();
+  const section2 = useRef();
+  const section3 = useRef();
+  const section4 = useRef();
+
   const Pages = [
     {
       title: "About",
+      section: section1,
     },
     {
       title: "Resume",
+      section: section2,
     },
     {
       title: "Projects",
+      section: section3,
     },
     {
       title: "Contact",
+      section: section4,
     },
   ];
+
   const handleOpen = () => setOpen(true);
+
   const handleClose = () => setOpen(false);
-  const handleClick = (item: string) => {
-    const sectionId = item.toLowerCase();
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
+
+  const handleClick = (ref: any) => {
+    if (ref.current) {
+      window.scrollTo({ top: ref.current.offsetTop, behavior: "smooth" });
+      handleClose();
     }
-    handleClose();
+    console.log("first", ref.current);
   };
+
   return (
     <div>
       <Button
@@ -71,7 +86,7 @@ export const Dropdown = () => {
                   buttonInsideTextSize="md:text-7xl text-5xl"
                   buttonInsideFontWeight="font-bold"
                   buttonInsideTextColor="text-[#1c2528] dark:text-[#FFF]"
-                  handleOnClick={() => handleClick(item.title)}
+                  handleOnClick={() => handleClick(item.section)}
                 />
               </div>
             ))}

@@ -43,7 +43,11 @@ import Try from "./../../../assets/img/try.jpg";
 import { DarkModeContext } from "../../../context/DarkMode/DarkModeContext";
 import { ProjectDataContext } from "../../../context/ProjectData/ProjectDataContext";
 
+import SocialMediaIcons from "./../../../constants/ProfileData";
+
 export const MainPage = () => {
+  const data = SocialMediaIcons();
+
   const router = useRouter();
 
   const [projectSelect, SetProjectSelect] = useState("All");
@@ -54,241 +58,30 @@ export const MainPage = () => {
 
   const { setData } = useContext(ProjectDataContext);
 
-  const socialMedia = [
-    {
-      logo: darkMode ? Linkedin : LindedinDark,
-      url: "https://pk.linkedin.com/",
-    },
-    {
-      logo: darkMode ? Github : GithubDark,
-      url: "https://github.com/",
-    },
-  ];
+  function downloadPDF() {
+    // URL to your existing PDF file
+    const pdfUrl = "./../../../assets/pdf/cv.pdf";
 
-  const BornExpDate = [
-    {
-      TextOne: "Born in",
-      TextTwo: "Islamabad",
-    },
-    {
-      TextOne: "Experience",
-      TextTwo: "6+ months",
-    },
-    {
-      TextOne: "Date of Birth",
-      TextTwo: "8th Jan 2001",
-    },
-  ];
+    // Fetch the PDF file
+    fetch(pdfUrl)
+      .then((response) => response.blob())
+      .then((blob) => {
+        // Create download link
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "SamplePDF.pdf"; // Change the filename as needed
 
-  const AboutSideData = [
-    {
-      icon: Work,
-      data: "10",
-      text: "Project Worked",
-    },
-    {
-      icon: Check,
-      data: "5",
-      text: "Project Completed",
-    },
-  ];
+        // Trigger download
+        document.body.appendChild(a);
+        a.click();
 
-  const Skills = [
-    {
-      language: "React Js",
-      grip: 6,
-    },
-    {
-      language: "Next Js",
-      grip: 6,
-    },
-    {
-      language: "Javascript",
-      grip: 6,
-    },
-    {
-      language: "HTML",
-      grip: 6,
-    },
-    {
-      language: "CSS",
-      grip: 6,
-    },
-  ];
-
-  const EducationData = [
-    {
-      startTime: "2019",
-      endTime: "2023",
-      degree: "Bachelors in Software Engineering",
-      institute: "Comsat University",
-    },
-    {
-      startTime: "2019",
-      endTime: "2023",
-      degree: "Bachelors in Software Engineering",
-      institute: "Comsat University",
-    },
-  ];
-
-  const WorkExperience = [
-    {
-      startTime: "Sept, 2023",
-      endTime: "Current",
-      institute: "Rapidev",
-      position: "Frontend Developer",
-      detail: "ddddd",
-    },
-    {
-      startTime: "Aug, 2021",
-      endTime: "Sept, 2021",
-      institute: "Asterisk",
-      position: "Frontend Intern",
-      detail: "ddddd",
-    },
-  ];
-
-  const Course = [
-    {
-      startTime: "2019",
-      endTime: "2023",
-      degree: "Bachelors in Software Engineering",
-      institute: "Comsat University",
-    },
-    {
-      startTime: "2019",
-      endTime: "2023",
-      degree: "Bachelors in Software Engineering",
-      institute: "Comsat University",
-    },
-  ];
-
-  const ProjectSelect = [
-    {
-      selectType: "All",
-    },
-    {
-      selectType: "Frontend",
-    },
-    {
-      selectType: "Backend",
-    },
-    {
-      selectType: "Full-Stack",
-    },
-    {
-      selectType: "SEO",
-    },
-  ];
-
-  const ProjectComponents = [
-    {
-      image: Try,
-      projectName: "Portfolio",
-      projectType: "Frontend",
-      languageUsed: "NextJs",
-      summary:
-        "I'm a recent Software Engineering graduate with a passion for frontend development. Skilled in HTML, CSS, Bootstrap, JavaScript, and SEO, I transform design concepts into user-friendly websites. I'm dedicated to continuous learning and eager to collaborate on exciting web projects. ",
-      children: {
-        ProjectSimpleDate: [
-          {
-            TextOne: "Time Frame",
-            TextTwo: "Dec 2023 - Jan 2024",
-          },
-          {
-            TextOne: "Technology",
-            TextTwo: "NextJs, Tailwind Css",
-          },
-          {
-            TextOne: "Category",
-            TextTwo: "Frontend",
-          },
-        ],
-        ToolType: [
-          {
-            selectType: "All",
-          },
-          {
-            selectType: "Language",
-          },
-          {
-            selectType: "Library",
-          },
-        ],
-        Tool: [
-          {
-            title: "About",
-          },
-          {
-            title: "Resume",
-          },
-          {
-            title: "Projects",
-          },
-          {
-            title: "Contact",
-          },
-        ],
-        images: [
-          {
-            src: Try,
-          },
-        ],
-      },
-    },
-  ];
-
-  const ReviewDetails = [
-    {
-      review:
-        "heelo etxt heelo etxt heelo etxt heelo etxt heelo etxt heelo etxt heelo etxt heelo etxt heelo etxt",
-      personName: "Haseeb Farooq",
-      personPosition: "Team Lead",
-      personProfile: "https://www.google.com",
-    },
-    {
-      review:
-        "heelo etxt heelo etxt heelo etxt heelo etxt heelo etxt heelo etxt heelo etxt heelo etxt heelo etxt",
-      personName: "Adnan",
-      personPosition: "Sr. Full Stack Developer",
-      personProfile: "https://www.google.com",
-    },
-  ];
-
-  const ContactSideData = [
-    {
-      icon: Phone,
-      data: "+92-307-5092577",
-    },
-    {
-      icon: Mail,
-      data: "hashir.khurram@gmail.com",
-    },
-    {
-      icon: Location,
-      data: "H # 17-B, St # 10, Block-A, Naval Anchorage, Islamabad, Pakistan",
-    },
-  ];
-
-  const ContactInuputs = [
-    {
-      header: "Name",
-      name: "from_name",
-      placeholder: "Enter your name",
-    },
-    {
-      header: "Email",
-      name: "user_email",
-
-      placeholder: "Enter your email address",
-    },
-    ,
-    {
-      header: "Message",
-      name: "message",
-      placeholder: "Enter your message",
-    },
-  ];
+        // Clean up
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+      })
+      .catch((error) => console.error("Error fetching PDF:", error));
+  }
 
   const navigateToURL = (url: string) => {
     window.open(url, "_blank");
@@ -346,7 +139,7 @@ export const MainPage = () => {
                 text={"I am a FrontEnd Developer based in Islamabad, Pakistan."}
               />
               <div className="flex gap-2 mt-4 md:mt-6">
-                {socialMedia.map((item, key) => {
+                {data.socialMedia.map((item, key) => {
                   return (
                     <div
                       className=""
@@ -367,7 +160,7 @@ export const MainPage = () => {
           </div>
         </div>
         <div className="flex flex-col md:flex-row justify-center items-center mt-5 ">
-          {BornExpDate.map((item, key) => (
+          {data.BornExpDate.map((item, key) => (
             <DoubleTextContainer
               key={key}
               textContainerOne={item.TextOne}
@@ -399,7 +192,7 @@ export const MainPage = () => {
           </div>
           <div className="flex lg:flex-row flex-col py-10">
             <div className="lg:flex-col flex-row flex lg:max-w-[140px] gap-10 mb-5 ml-10">
-              {AboutSideData.map((item, key) => {
+              {data.AboutSideData.map((item, key) => {
                 return (
                   <div key={key}>
                     <SideInfo
@@ -467,7 +260,7 @@ export const MainPage = () => {
                 textColor={"text-[#1c2528]  dark:text-[#FFF]"}
                 padding="pb-10"
               />
-              {Skills.map((item, key) => {
+              {data.Skills.map((item, key) => {
                 return (
                   <div
                     className="flex items-center my-4 justify-between"
@@ -492,7 +285,7 @@ export const MainPage = () => {
                       textColor={"text-[#1c2528]  dark:text-[#FFF]"}
                       padding="pb-10"
                     />
-                    {EducationData.map((item, key) => {
+                    {data.EducationData.map((item, key) => {
                       return (
                         <div className="mb-12 " key={key}>
                           <TripleTextContainer
@@ -525,7 +318,7 @@ export const MainPage = () => {
                       textColor={"text-[#1c2528]  dark:text-[#FFF]"}
                       padding="pb-10"
                     />
-                    {Course.map((item, key) => {
+                    {data.Course.map((item, key) => {
                       return (
                         <div className="mb-12" key={key}>
                           <TripleTextContainer
@@ -560,7 +353,7 @@ export const MainPage = () => {
                       textColor={"text-[#1c2528]  dark:text-[#FFF]"}
                       padding="pb-10"
                     />
-                    {WorkExperience.map((item, key) => {
+                    {data.WorkExperience.map((item, key) => {
                       return (
                         <div key={key}>
                           <TripleTextContainer
@@ -604,7 +397,7 @@ export const MainPage = () => {
               buttonInsideFontWeight="font-bold"
               buttonInsideTextColor=" "
               buttonInsideTextSize="text-lg"
-              handleOnClick={() => downloadButton()}
+              handleOnClick={() => downloadPDF()}
             />
           </div>
         </div>
@@ -636,7 +429,7 @@ export const MainPage = () => {
           </div>
 
           <div className="lg:max-w-[800px] m-10 flex Fivess:place-content-around justify-center items-center align-middle Fivess:flex-row flex-col ">
-            {ProjectSelect.map((item, key) => {
+            {data.ProjectSelect.map((item, key) => {
               return (
                 <div className="" key={key}>
                   <Button
@@ -659,7 +452,7 @@ export const MainPage = () => {
           </div>
 
           <div className="lg:max-w-[1000px] my-10">
-            {ProjectComponents.filter(
+            {data.ProjectComponents.filter(
               (item) =>
                 projectSelect === "All" || item.projectType === projectSelect
             ).map((item, key) => {
@@ -696,7 +489,7 @@ export const MainPage = () => {
             autoplay
             className="flex items-center justify-center xl:w-[1000px] md:w-[700px] Fivess:w-[400px] w-[200px] my-20 Fivess:h-60 h-80 "
           >
-            {ReviewDetails.map((item, key) => {
+            {data.ReviewDetails.map((item, key) => {
               return (
                 <div
                   className="flex flex-col items-center justify-center h-full"
@@ -808,7 +601,7 @@ export const MainPage = () => {
 
           <div className="flex md:flex-row flex-col py-10">
             <div className="flex md:flex-col Fivess:flex-row flex-col Fivess:gap-10 ml-10">
-              {ContactSideData.map((item, key) => {
+              {data.ContactSideData.map((item, key) => {
                 return (
                   <div key={key} className="w-full md:w-auto md:mb-0 md:mr-5">
                     <SideInfo
@@ -822,7 +615,7 @@ export const MainPage = () => {
             </div>
             <div className="w-full md:border-l-2 md:border-gray-500 p-10 ">
               <form ref={form} onSubmit={sendEmail}>
-                {ContactInuputs.map((item, key) => (
+                {data.ContactInuputs.map((item, key) => (
                   <div key={key} className="mb-5">
                     <Text
                       text={item?.header}

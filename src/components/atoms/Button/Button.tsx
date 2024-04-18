@@ -24,6 +24,7 @@ export function Button({
   buttonInsideTextSize,
   buttonInsideFontWeight,
   imageCheck = false,
+  ref,
 }: {
   disabled?: boolean;
 
@@ -48,12 +49,14 @@ export function Button({
   buttonInsideTextSize?: string;
   buttonInsideFontWeight?: string;
   imageCheck?: boolean;
+  ref?: any;
 }) {
   return (
     <>
       <button
         onClick={handleOnClick}
         disabled={disabled}
+        ref={ref}
         type={type}
         className={`${
           buttonStyling
