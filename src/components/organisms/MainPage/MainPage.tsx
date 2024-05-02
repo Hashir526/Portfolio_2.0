@@ -98,7 +98,7 @@ export const MainPage = () => {
           () => {
             console.log("SUCCESS!");
             form?.current?.reset();
-            enqueueSnackbar("Request successful", { variant: "success" });
+            // enqueueSnackbar("Request successful", { variant: "success" });
           },
           (error: { text: any }) => {
             console.log("FAILED...", error.text);
