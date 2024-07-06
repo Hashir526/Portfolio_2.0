@@ -29,11 +29,11 @@ const SocialMediaIcons = () => {
     socialMedia: [
       {
         logo: darkMode ? Linkedin : LindedinDark,
-        url: "https://pk.linkedin.com/",
+        url: "https://www.linkedin.com/in/hashir-khurram-55055aa9/",
       },
       {
         logo: darkMode ? Github : GithubDark,
-        url: "https://github.com/",
+        url: "https://github.com/Hashir526",
       },
     ],
   
@@ -44,7 +44,7 @@ const SocialMediaIcons = () => {
       },
       {
         TextOne: "Experience",
-        TextTwo: "6+ months",
+        TextTwo: "10 months",
       },
       {
         TextOne: "Date of Birth",
@@ -79,21 +79,26 @@ const SocialMediaIcons = () => {
         grip: 6,
       },
       {
-        language: "HTML",
+        language: "Typescript",
         grip: 6,
       },
       {
         language: "CSS",
         grip: 6,
       },
+      
+      {
+        language: "Bootstrap",
+        grip: 6,
+      },
     ],
   
     EducationData: [
       {
-        startTime: "2019",
-        endTime: "2023",
-        degree: "Bachelors in Software Engineering",
-        institute: "Comsat University",
+        startTime: "2024",
+        endTime: "In Progress",
+        degree: "Masters in Media Informatics",
+        institute: "Saarland University",
       },
       {
         startTime: "2019",
@@ -106,7 +111,7 @@ const SocialMediaIcons = () => {
     WorkExperience: [
       {
         startTime: "Sept, 2023",
-        endTime: "Current",
+        endTime: "June, 2024",
         institute: "Rapidev",
         position: "Frontend Developer",
         detail: "ddddd",
@@ -122,16 +127,28 @@ const SocialMediaIcons = () => {
   
     Course: [
       {
-        startTime: "2019",
-        endTime: "2023",
-        degree: "Bachelors in Software Engineering",
-        institute: "Comsat University",
+        startTime: "20 Nov, 2023",
+        endTime: "30 Nov, 2023",
+        degree: "Javascript Tutorials",
+        institute: "Akshay Saini",
       },
       {
-        startTime: "2019",
-        endTime: "2023",
-        degree: "Bachelors in Software Engineering",
-        institute: "Comsat University",
+        startTime: "7 Oct, 2023",
+        endTime: "20 Oct, 2023",
+        degree: "ReactJS Tutorial",
+        institute: "CodeWithHarry",
+      },
+      {
+        startTime: "20 Sept, 2023",
+        endTime: "6 Oct, 2023",
+        degree: "JavaScript Tutorials for Beginners",
+        institute: "CodeWithHarry",
+      },
+      {
+        startTime: "10 Dec, 2021",
+        endTime: "13 Feb, 2022",
+        degree: "Digital marketing, SEO and Affliate Marketing Certificate",
+        institute: "MasterMinded",
       },
     ],
   

@@ -209,7 +209,7 @@ export const MainPage = () => {
             <div className="max-w-[750px] lg:border-l-2 lg:border-gray-500 dark:md:border-white p-10 ">
               <Text
                 text={
-                  "I'm a recent Software Engineering graduate with a passion for frontend development. Skilled in HTML, CSS, Bootstrap, JavaScript, and SEO, I transform design concepts into user-friendly websites. I'm dedicated to continuous learning and eager to collaborate on exciting web projects. "
+                  "I am a master's student in Media Informatics with a passion for frontend development. I aim to transform design concepts into user-friendly websites. I am dedicated to continuous learning and eager to collaborate on exciting web projects and enhance my skills further. "
                 }
                 padding="mb-10"
               />
@@ -244,14 +244,14 @@ export const MainPage = () => {
             />
           </div>
 
-          <div className="max-w-[1000px] md:border-l-2 md:border-gray-500 dark:md:border-white p-8 md:mt-10  ">
-            <div className="p-7 lg:mb-10">
+          <div className="max-w-[1000px] xl:border-l-2 xl:border-gray-500 dark:xl:border-white p-8 md:mt-10  ">
+            {/* <div className="p-7 lg:mb-10">
               <Text
                 text={
                   "Talented UX designer with 7+ years of experience, seeking to elevate UI/UX at ABC, Inc. As Lead UI/UX Head completed project before dead line. ittis augue, id sollicitudin justo tristique ut. Nullam ex enim, euismod vel bibendum ultrices, fringilla vel eros. Donec euism od leo um, at pellentesque velituis a congue sem."
                 }
               />
-            </div>
+            </div> */}
             <div className="p-7">
               <Text
                 text={"SKILLS"}
@@ -275,7 +275,7 @@ export const MainPage = () => {
               })}
             </div>
             <div className="flex p-7">
-              <div className="flex md:gap-48 gap-10  flex-wrap ">
+              <div className="flex  gap-10  flex-wrap ">
                 <div>
                   <div className="">
                     <Text
